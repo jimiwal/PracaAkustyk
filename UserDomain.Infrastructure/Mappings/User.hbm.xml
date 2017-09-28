@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="UserDomain.Model.Entities"
+                    assembly="UserDomain.Model">
+  <class name="User" table="Users">
+    <id name="Id" column="Id" type="Int32" unsaved-value ="0">
+      <!-- using native Id generator requires property name="connection.release_mode" -> on_close in nH config !!! -->
+      <generator class="native" >
+      </generator>
+    </id>
+    <property name="Name" lazy="false"></property>
+    <property name="LastName" lazy="false"></property>
+    <property name="Email" lazy="false" unique="true"></property>
+    <property name="Phone" lazy="false" unique="true"></property>
+    <property name="Address" lazy="false"></property>
+    <property name="Custom1" lazy="false"></property>
+    <property name="Custom2" lazy="false"></property>
+    <property name="Custom3" lazy="false"></property>
+
+  </class>
+</hibernate-mapping>

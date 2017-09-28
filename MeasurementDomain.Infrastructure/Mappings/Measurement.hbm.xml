@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="MeasurementDomain.Model.Entities"
+                    assembly="MeasurementDomain.Model">
+  <class name="Measurement" table="Measurement">
+    <id name="Id" column="Id" type="Int32" unsaved-value ="0">
+      <!-- using native Id generator requires property name="connection.release_mode" -> on_close in nH config !!! -->
+      <generator class="native" >
+      </generator>
+    </id>
+    <property name="Name" lazy="false" unique="true"></property>
+  </class>
+</hibernate-mapping>

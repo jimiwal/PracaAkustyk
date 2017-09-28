@@ -1,0 +1,33 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	mc:Ignorable="d"
+	x:Class="WPFPageSwitch.Process_Step1"
+	d:DesignWidth="640" d:DesignHeight="480" Width="800" Height="600">
+
+    <Grid x:Name="gameplayLayoutRoot" Background="White">
+        <TextBlock Height="40" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="200" Text="Select Frequency" TextWrapping="Wrap" FontSize="21.333"/>
+        <Button HorizontalAlignment="Right" Margin="0,0,142.449,10" VerticalAlignment="Bottom" Width="100" Content="&lt; Back" Height="25" Click="Button_Click"/>
+
+        <ListView x:Name="listView" ItemsSource="{Binding AvailableSounds}" HorizontalAlignment="Left" Height="320" Margin="226,112,0,0" VerticalAlignment="Top" Width="300" RenderTransformOrigin="-0.505,0.44">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Frequency" Width="100" DisplayMemberBinding="{Binding Frequency}" />
+                    <GridViewColumn Header="Volume" Width="100" DisplayMemberBinding="{Binding Volume}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <!--<TextBox x:Name="textBoxfreq1" HorizontalAlignment="Left" Margin="403.065,202.72,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Height="26.882" Width="78.159"/>
+        <TextBox x:Name="textBoxfreq2" HorizontalAlignment="Left" Margin="403.065,234.602,0,0" TextWrapping="Wrap" Text="1200" VerticalAlignment="Top" Height="26.882" Width="78.159"/>
+        <TextBox x:Name="textBoxfreq3" HorizontalAlignment="Left" Margin="403.065,266.484,0,0" TextWrapping="Wrap" Text="2000" VerticalAlignment="Top" Height="26.882" Width="78.159"/>
+        <TextBox x:Name="textBoxfreq4" HorizontalAlignment="Left" Margin="403.065,298.366,0,0" TextWrapping="Wrap" Text="2300" VerticalAlignment="Top" Height="26.882" Width="78.159"/>
+        <TextBlock x:Name="textBlockfreq1" HorizontalAlignment="Left" Margin="281.632,205.72,0,0" TextWrapping="Wrap" Text="Freq 1" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlockfreq2" HorizontalAlignment="Left" Margin="281.632,234.602,0,0" TextWrapping="Wrap" Text="Freq 2" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlockfreq3" HorizontalAlignment="Left" Margin="281.632,266.484,0,0" TextWrapping="Wrap" Text="Freq 3" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlockfreq4" HorizontalAlignment="Left" Margin="281.632,298.366,0,0" TextWrapping="Wrap" Text="Freq 4" VerticalAlignment="Top"/>-->
+        <Button HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="100" Content="Next >" Height="25" Click="Button_Click_1"/>
+    </Grid>
+</UserControl>

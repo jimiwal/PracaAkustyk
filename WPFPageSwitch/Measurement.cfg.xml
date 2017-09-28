@@ -1,0 +1,15 @@
+﻿<hibernate-configuration xmlns="urn:nhibernate-configuration-2.2">
+  <session-factory>
+    <property name="connection.provider">NHibernate.Connection.DriverConnectionProvider</property>
+    <property name="dialect">NHibernate.Dialect.MsSqlCeDialect</property>
+    <property name="connection.driver_class">NHibernate.Driver.SqlServerCeDriver</property>
+    <property name="connection.connection_string_name">SoundConnection</property>
+    <property name="connection.release_mode">on_close</property>
+    <!--
+      <property name="proxyfactory.factory_class">NHibernate.ByteCode.Castle.ProxyFactoryFactory,NHibernate.ByteCode.Castle</property>
+      -->
+    <property name="show_sql">false</property>
+    <property name="current_session_context_class">thread_static</property>
+    <mapping assembly="MeasurementDomain.Infrastructure" />
+  </session-factory>
+</hibernate-configuration>
