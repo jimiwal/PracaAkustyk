@@ -15,6 +15,6 @@ namespace SoundDomain.Services
         void Stop();
         IList<Sound> GetSoundsForUser(User user);
         void SaveSoundSettings(SoundSetting soundSetting);
-        void RemoveAllSoundsForUser(User user);
+        void RemoveAllSoundsForUser(User user); //add
     }
 }
