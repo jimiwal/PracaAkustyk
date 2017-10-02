@@ -11,5 +11,7 @@
     <property name="show_sql">false</property>
     <property name="current_session_context_class">thread_static</property>
     <mapping assembly="MeasurementDomain.Infrastructure" />
+    <mapping assembly="SoundDomain.Infrastructure" />
+    <mapping assembly="UserDomain.Infrastructure" />
   </session-factory>
 </hibernate-configuration>

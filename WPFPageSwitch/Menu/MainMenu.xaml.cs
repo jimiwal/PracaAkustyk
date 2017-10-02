@@ -30,6 +30,17 @@ namespace WPFPageSwitch
         private void MainMenu_Loaded(object sender, RoutedEventArgs e)
         {
             UserLabel = UserService.SelectedUser != null ? UserService.SelectedUser.Name + " - " + UserService.SelectedUser.Email : "No User has been selected";
+
+            if(UserService.SelectedUser == null)
+            {
+                newProcessBtn.IsEnabled = false;
+                myProcessesBtn.IsEnabled = false;
+            }
+            else
+            {
+                newProcessBtn.IsEnabled = true;
+                myProcessesBtn.IsEnabled = true;
+            }
         }
 
         public String UserLabel
@@ -45,7 +56,7 @@ namespace WPFPageSwitch
 
 		private void loadGameButton_Click(object sender, System.Windows.RoutedEventArgs e)
 		{
-			Switcher.Switch(new LoadProcess());
+			Switcher.Switch(new MyProcesses());
 		}
 
 		private void optionButton_Click(object sender, System.Windows.RoutedEventArgs e)

@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.1.1.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -57,9 +65,18 @@
       <Project>{F37F0633-8A7A-4CE1-B312-1A04A2FFA2C9}</Project>
       <Name>RepositoryComponents</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UserDomain.Model\UserDomain.Model.csproj">
+      <Project>{26E33B33-0193-43CA-ADE5-7BC12BE2C683}</Project>
+      <Name>UserDomain.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UtilityComponent\UtilityComponent.csproj">
+      <Project>{68a61f4f-7791-48e2-a9ce-d67048f91fb1}</Project>
+      <Name>UtilityComponent</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

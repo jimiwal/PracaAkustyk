@@ -1,4 +1,5 @@
-﻿using NHibernate.Util;
+﻿using MeasurementDomain.Services.DomainLayer;
+using NHibernate.Util;
 using SoundDomain.Infrastructure.Repositories;
 using SoundDomain.Model.Entities;
 using SoundDomain.Model.ValueObjects;
@@ -20,17 +21,34 @@ namespace WPFPageSwitch
 {
 	public partial class Process_Step1 : UserControl, ISwitchable
 	{
-		public Process_Step1()
+        private string measurementName;
+
+        public Process_Step1()
 		{
 			InitializeComponent();
 
             AvailableSounds = new ObservableCollection<Sound>();
 
             this.Loaded += Process_Step1_Loaded;
+            nextBtn.IsEnabled = false;
+
             this.DataContext = this;
         }        
 
         public System.Collections.ObjectModel.ObservableCollection<Sound> AvailableSounds { get; set; }
+
+        public string MeasurementName
+        {
+            get
+            {
+                return measurementName;
+            }
+
+            set
+            {
+                measurementName = value;                
+            }
+        }
 
         #region ISwitchable Members
         public void UtilizeState(object state)
@@ -46,6 +64,7 @@ namespace WPFPageSwitch
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            MeasurementService.LastMeasurementName = MeasurementName;
             Switcher.Switch(new Process_Step2());
         }
 
@@ -60,6 +79,11 @@ namespace WPFPageSwitch
                 AvailableSounds.Clear();
                 var sounds = SoundServiceSingleton.Instance.GetSoundsForUser(UserService.SelectedUser);                
                 sounds.ForEach(x => AvailableSounds.Add(x));
+
+                if(sounds.Count > 0)
+                {
+                    nextBtn.IsEnabled = true;
+                }
             }            
         }
     }

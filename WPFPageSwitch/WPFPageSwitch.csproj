@@ -95,6 +95,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Menu\MyProcesses.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Menu\Process_Step2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -147,6 +151,9 @@
     </Compile>
     <Compile Include="Menu\AfterSpundHear.xaml.cs">
       <DependentUpon>AfterSpundHear.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\MyProcesses.xaml.cs">
+      <DependentUpon>MyProcesses.xaml</DependentUpon>
     </Compile>
     <Compile Include="Menu\Process_Step2.xaml.cs">
       <DependentUpon>Process_Step2.xaml</DependentUpon>
@@ -217,6 +224,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MeasurementDomain.Infrastructure\MeasurementDomain.Infrastructure.csproj">
+      <Project>{EB22BC46-FC60-4824-B4E5-6F2EC6F13A7C}</Project>
+      <Name>MeasurementDomain.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MeasurementDomain.Model\MeasurementDomain.Model.csproj">
+      <Project>{6C088F78-ACE5-46B3-9E06-ADDEF5A82D18}</Project>
+      <Name>MeasurementDomain.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MeasurementDomain.Services\MeasurementDomain.Services.csproj">
       <Project>{e60b653e-1970-447a-8dc1-5112a5d81012}</Project>
       <Name>MeasurementDomain.Services</Name>

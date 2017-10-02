@@ -10,9 +10,13 @@ using UtilityComponent.Entities;
 namespace MeasurementDomain.Model.Entities
 {
     public class Measurement : GenericEntity
-    {        
+    {
+        public Measurement()
+        {
+            Sounds = new List<SoundHeard>();
+        }
         public virtual string Name { get; set; }
-        public virtual SoundHeard Sound { get; set; }
+        public virtual List<SoundHeard> Sounds { get; set; }
         public virtual User User { get; set; }
         public virtual DateTime DateTime { get; set; }
     }

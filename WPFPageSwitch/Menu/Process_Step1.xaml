@@ -8,7 +8,7 @@
 	d:DesignWidth="640" d:DesignHeight="480" Width="800" Height="600">
 
     <Grid x:Name="gameplayLayoutRoot" Background="White">
-        <TextBlock Height="40" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="200" Text="Select Frequency" TextWrapping="Wrap" FontSize="21.333"/>
+        <TextBlock Height="40" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="200" Text="Badanie" TextWrapping="Wrap" FontSize="21.333"/>
         <Button HorizontalAlignment="Right" Margin="0,0,142.449,10" VerticalAlignment="Bottom" Width="100" Content="&lt; Back" Height="25" Click="Button_Click"/>
 
         <ListView x:Name="listView" ItemsSource="{Binding AvailableSounds}" HorizontalAlignment="Left" Height="320" Margin="226,112,0,0" VerticalAlignment="Top" Width="300" RenderTransformOrigin="-0.505,0.44">
@@ -28,6 +28,8 @@
         <TextBlock x:Name="textBlockfreq2" HorizontalAlignment="Left" Margin="281.632,234.602,0,0" TextWrapping="Wrap" Text="Freq 2" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlockfreq3" HorizontalAlignment="Left" Margin="281.632,266.484,0,0" TextWrapping="Wrap" Text="Freq 3" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlockfreq4" HorizontalAlignment="Left" Margin="281.632,298.366,0,0" TextWrapping="Wrap" Text="Freq 4" VerticalAlignment="Top"/>-->
-        <Button HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="100" Content="Next >" Height="25" Click="Button_Click_1"/>
+        <Button x:Name="nextBtn" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="100" Content="Next >" Height="25" Click="Button_Click_1"/>
+        <Label x:Name="label" Content="Nazwa badania :" HorizontalAlignment="Left" Margin="226,453,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="328,456,0,0" TextWrapping="Wrap" Text="{Binding MeasurementName}" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </UserControl>

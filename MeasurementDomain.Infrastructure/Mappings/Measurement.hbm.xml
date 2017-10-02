@@ -9,5 +9,15 @@
       </generator>
     </id>
     <property name="Name" lazy="false" unique="true"></property>
+
+    <property name="DateTime" lazy="false" not-null="true"></property>
+    <!--<bag name="Sounds" lazy="false" cascade ="all-delete-orphan">
+      <key column="fk_MeasurementId"/>
+      <one-to-many class="SoundDomain.Model.Entities.SoundHeard"/>
+    </bag>-->
+    
+    <many-to-one name="User" class="UserDomain.Model.Entities.User"
+                 column ="fk_UserId" unique="false" cascade="none"
+                 fetch ="join" lazy ="false" update="false" not-null="true"/>
   </class>
 </hibernate-mapping>

@@ -5,9 +5,33 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPFPageSwitch.Menu"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignWidth="800" d:DesignHeight="600">
     <Grid>
-        <TextBlock  Margin="10,10,250,269"> OK !!!</TextBlock>
-        <Button x:Name="button" Content="Start Again" HorizontalAlignment="Left" Margin="215,268,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="29*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock  Margin="10,10,651,75">Badanie dobiegło końca</TextBlock>
+
+        <Label x:Name="label" Content="Pacjent" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" RenderTransformOrigin="-7.842,-0.231" Grid.Row="0"/>
+        <Label x:Name="label1" Content="{Binding UserName}" HorizontalAlignment="Left" Margin="150,46,0,0" VerticalAlignment="Top" Grid.Row="0"/>
+        <Label x:Name="label2" Content="Nazwa badania" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Grid.Row="0"/>
+        <Label x:Name="label3" Content="{Binding MeasurementName}" HorizontalAlignment="Left" Margin="150,80,0,0" VerticalAlignment="Top" Grid.Row="0"/>
+
+
+
+
+        <ListView x:Name="listView" ItemsSource="{Binding SoundHeard}" HorizontalAlignment="Left" Height="442" Margin="193,10,0,0" VerticalAlignment="Top" Width="459" RenderTransformOrigin="-0.505,0.44" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Nazwa" Width="100" DisplayMemberBinding="{Binding Sound.Name}" />
+                    <GridViewColumn Header="Częstotliwość" Width="100" DisplayMemberBinding="{Binding Sound.Frequency}" />
+                    <GridViewColumn Header="Głośność" Width="100" DisplayMemberBinding="{Binding Sound.Volume}" />
+                    <GridViewColumn Header="Odpowiedź" Width="100" DisplayMemberBinding="{Binding Answer}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button x:Name="button" Content="Zakończ" HorizontalAlignment="Left" Margin="693,430,0,0" VerticalAlignment="Top" Width="75" Click="button_Click" Grid.Row="1"/>
     </Grid>
 </UserControl>

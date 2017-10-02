@@ -1,5 +1,9 @@
-﻿using NHibernate.Util;
+﻿using MeasurementDomain.Infrastructure.Repositories;
+using MeasurementDomain.Model.Entities;
+using MeasurementDomain.Services.DomainLayer;
+using NHibernate.Util;
 using SoundDomain.Infrastructure.Repositories;
+using SoundDomain.Model.Entities;
 using SoundDomain.Model.ValueObjects;
 using SoundDomain.Services;
 using System;
@@ -13,18 +17,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using UserDomain.Model.Entities;
 using UserDomain.Services.DomainLayer;
 using WPFPageSwitch.Menu;
 
 namespace WPFPageSwitch
 {
+    //Measurement process
 	public partial class Process_Step2 : UserControl, ISwitchable
 	{
         private int index = 0;
         private float frequency = 0;
         private float volume = 0;
         ISoundService soundServiceSingleton;
-        
+
+        Measurement myCurrentMeasurement;
+
         RadioButton selectedCheckbox;
         public Process_Step2()
 		{
@@ -35,8 +43,7 @@ namespace WPFPageSwitch
 
             soundServiceSingleton = SoundServiceSingleton.Instance;
 
-            this.Loaded += Process_Step2_Loaded; ;
-
+            this.Loaded += Process_Step2_Loaded;
         }
 
         public System.Collections.ObjectModel.ObservableCollection<Sound> AvailableSounds { get; set; }
@@ -57,6 +64,8 @@ namespace WPFPageSwitch
             volume = (float)(AvailableSounds[index].Volume / 100);
 
             NameTxt.Text = AvailableSounds[index].Name.ToString();
+
+            CreateMeasurementObject();
         }
 
         #region ISwitchable Members
@@ -80,10 +89,13 @@ namespace WPFPageSwitch
                 selectedCheckbox.IsChecked = false;
             }
 
+            SaveAnswer();
+
             index++;
             if (AvailableSounds.Count <= index)
             {
-                Switcher.Switch(new AfterSpundHear());
+                int dbId = SaveMeasurement();
+                Switcher.Switch(new AfterSpundHear(dbId));
                 return;
             }
 
@@ -111,6 +123,34 @@ namespace WPFPageSwitch
         {
             nextBtn.IsEnabled = true;
             selectedCheckbox = sender as RadioButton;
+        }
+
+        
+        void CreateMeasurementObject()
+        {
+            myCurrentMeasurement = new Measurement();
+            myCurrentMeasurement.User = UserService.SelectedUser;
+            myCurrentMeasurement.Name = MeasurementService.LastMeasurementName;
+
+        }
+
+        private void SaveAnswer()
+        {
+            Sound currentSound = AvailableSounds[index];            
+            SoundHeard soundHeard = new SoundHeard();
+            soundHeard.Sound = currentSound;
+            soundHeard.Answer = 5;
+
+            myCurrentMeasurement.Sounds.Add(soundHeard);
+        }
+
+        private int SaveMeasurement()
+        {
+            myCurrentMeasurement.DateTime = DateTime.Now;
+            MeasurementRepositorySingleton.Instance.Save(myCurrentMeasurement);
+            MeasurementRepositorySingleton.Instance.Flush();
+
+            return myCurrentMeasurement.Id;
         }
     }
 }
