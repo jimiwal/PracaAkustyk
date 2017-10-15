@@ -16,7 +16,7 @@ namespace MeasurementDomain.Model.Entities
             Sounds = new List<SoundHeard>();
         }
         public virtual string Name { get; set; }
-        public virtual List<SoundHeard> Sounds { get; set; }
+        public virtual IList<SoundHeard> Sounds { get; set; }
         public virtual User User { get; set; }
         public virtual DateTime DateTime { get; set; }
     }

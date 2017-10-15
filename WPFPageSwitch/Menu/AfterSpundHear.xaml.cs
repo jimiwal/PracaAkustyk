@@ -62,7 +62,7 @@ namespace WPFPageSwitch.Menu
         {
             measurement = MeasurementRepositorySingleton.Instance.Get(idOfMeasurement);
             
-            measurement.Sounds.ForEach(x => SoundHeard.Add(x));
+            measurement.Sounds.ToList().ForEach(x => SoundHeard.Add(x));
         }
 
         public void UtilizeState(object state)
