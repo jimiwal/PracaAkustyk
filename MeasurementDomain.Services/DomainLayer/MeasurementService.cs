@@ -47,6 +47,12 @@ namespace MeasurementDomain.Services.DomainLayer
             return userMeasurements;
         }
 
+        public void RemoveMeasuremant(Measurement measurement)
+        {
+            MeasurementRepository.Remove(measurement);
+            MeasurementRepository.Flush();
+        }
+
         public static string LastMeasurementName { get; set; }
     }
 

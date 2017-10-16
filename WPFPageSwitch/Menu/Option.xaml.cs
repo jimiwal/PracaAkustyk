@@ -82,8 +82,11 @@ namespace WPFPageSwitch
             var sounds = SoundRepositorySingleton.Instance.FindAll().ToList();
             sounds.ForEach(x => AvailableSounds.Add(x));
 
-            var userSoundList = SoundServiceSingleton.Instance.GetSoundsForUser(UserService.SelectedUser);
-            userSoundList.ForEach(x => SoundsInProcess.Add(x));
+            if(UserService.SelectedUser != null)
+            {
+                var userSoundList = SoundServiceSingleton.Instance.GetSoundsForUser(UserService.SelectedUser);
+                userSoundList.ForEach(x => SoundsInProcess.Add(x));
+            }            
         }
 
         #region ISwitchable Members

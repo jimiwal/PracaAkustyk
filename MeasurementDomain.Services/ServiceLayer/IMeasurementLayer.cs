@@ -12,5 +12,7 @@ namespace MeasurementDomain.Services.ServiceLayer
     {
         void GetMeasuremetns();
         IList<Measurement> GetMeasurementsForUser(User user);
+
+        void RemoveMeasuremant(Measurement measurement);
     }
 }

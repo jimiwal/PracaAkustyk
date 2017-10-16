@@ -11,7 +11,7 @@
     </id>
     
     <many-to-one name="Sound" class="SoundDomain.Model.ValueObjects.Sound"
-                 column ="fk_SoundId" unique="false" cascade="all" 
+                 column ="fk_SoundId" unique="false" cascade="none" 
                  fetch ="join" lazy ="false" update="false" not-null="true"/>
 
     <property name="Answer" lazy="false"></property>

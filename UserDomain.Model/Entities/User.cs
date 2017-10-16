@@ -16,6 +16,6 @@ namespace UserDomain.Model.Entities
         public virtual string Address { get; set; }
         public virtual string Custom1 { get; set; }
         public virtual string Custom2 { get; set; }
-        public virtual string Custom3 { get; set; }
+        public virtual string Custom3 { get; set; }        
     }
 }

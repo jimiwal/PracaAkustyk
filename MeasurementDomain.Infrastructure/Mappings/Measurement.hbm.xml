@@ -11,7 +11,7 @@
     <property name="Name" lazy="false" unique="true"></property>
 
     <property name="DateTime" lazy="false" not-null="true"></property>
-    <bag name="Sounds" lazy="false" cascade ="all" inverse="true">
+    <bag name="Sounds" lazy="false" cascade ="all-delete-orphan">
       <key column="fk_MeasurementId"/>
       <one-to-many class="SoundDomain.Model.Entities.SoundHeard"/>
     </bag>

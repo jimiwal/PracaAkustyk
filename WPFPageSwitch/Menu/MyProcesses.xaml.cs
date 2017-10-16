@@ -7,6 +7,8 @@ using SoundDomain.Model.Entities;
 using SoundDomain.Model.ValueObjects;
 using SoundDomain.Services;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -42,9 +44,11 @@ namespace WPFPageSwitch
             MyMeasurements.Clear();
             measurements.ForEach(x => MyMeasurements.Add(x));
         }
-
         public System.Collections.ObjectModel.ObservableCollection<Measurement> MyMeasurements { get; set; }
 
+        public Measurement SelectedMeasurement { get; set; }
+
+        public IList SelectedItems { get; set; }
 
         #region ISwitchable Members
         public void UtilizeState(object state)
@@ -62,6 +66,20 @@ namespace WPFPageSwitch
         private void button_Click_2(object sender, RoutedEventArgs e)
         {//Back to menu
             Switcher.Switch(new MainMenu());
+        }
+        
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {//Usuń badanie
+            if(SelectedMeasurement != null)
+            {
+                IList< Measurement > listOfMeasurements = SelectedItems as IList<Measurement>;
+                foreach (var item in SelectedItems.Cast<Measurement>().ToList())
+                {
+                    MeasurementServiceSingleton.Instance.RemoveMeasuremant(item as Measurement);
+                    MyMeasurements.Remove(SelectedMeasurement);
+                }
+                
+            }            
         }
     }
 }
