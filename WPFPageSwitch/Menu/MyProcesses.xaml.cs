@@ -10,6 +10,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,8 +24,8 @@ using UserDomain.Services.DomainLayer;
 
 namespace WPFPageSwitch
 {
-	public partial class MyProcesses : UserControl, ISwitchable
-	{
+	public partial class MyProcesses : UserControl, ISwitchable, INotifyPropertyChanged
+    {
         private string measurementName;
 
         public MyProcesses()
@@ -80,6 +81,18 @@ namespace WPFPageSwitch
                 }
                 
             }            
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void RaisePropertyChanged(string propertyName)
+        {
+
+            PropertyChangedEventHandler handler = this.PropertyChanged;
+            if (handler != null)
+            {
+                var e = new PropertyChangedEventArgs(propertyName);
+                handler(this, e);
+            }
         }
     }
 }
