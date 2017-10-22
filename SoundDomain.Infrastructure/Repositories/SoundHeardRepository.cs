@@ -14,8 +14,6 @@ namespace SoundDomain.Infrastructure.Repositories
     {
         private SoundHeardRepository() { }
 
-        private static string className = "SoundHeardRepository";
-
         public const string DBConfigName = "Sound.cfg.xml";
 
         public override NHibernate.ISession Session

@@ -13,9 +13,5 @@ namespace MeasurementDomain.Model.RepositoryInterfaces
     {
         Measurement Get(int id);
         List<Measurement> GetAll();
-        IList<Measurement> Find(AbstractSpecification<Measurement> specification);
-        void Save(Measurement actorNotification);
-        void Remove(Measurement actorNotification);
-        void Flush();
     }
 }

@@ -4,6 +4,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 	mc:Ignorable="d"
+    xmlns:local="clr-namespace:WPFPageSwitch.Menu"
 	x:Class="WPFPageSwitch.Process_Step2"
 	d:DesignWidth="640" d:DesignHeight="480" Width="800" Height="600">
 
@@ -11,19 +12,13 @@
         <TextBlock Height="40" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="200" Text="Hear Sounds" TextWrapping="Wrap" FontSize="21.333"/>
         <Button HorizontalAlignment="Right" Margin="0,0,142.449,10" VerticalAlignment="Bottom" Width="100" Content="&lt; Back" Height="25" Click="Button_Click"/>
         <Button x:Name="nextBtn" Content="Next Step" HorizontalAlignment="Left" Margin="501,319,0,0" VerticalAlignment="Top" Width="75" Click="button_Click_1"/>
-        <TextBlock x:Name="freqTxt" HorizontalAlignment="Left" Margin="204,231,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <TextBlock x:Name="VolumeTxt" HorizontalAlignment="Left" Margin="204,252,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <TextBlock x:Name="NameTxt" HorizontalAlignment="Left" Margin="204,273,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="110,231,0,0" TextWrapping="Wrap" Text="Frequency" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="110,252,0,0" TextWrapping="Wrap" Text="Volume" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="110,273,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>
+        <TextBlock x:Name="freqTxt" HorizontalAlignment="Left" Margin="114,69,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <TextBlock x:Name="NameTxt" HorizontalAlignment="Left" Margin="114,90,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="20,69,0,0" TextWrapping="Wrap" Text="Frequency" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="20,90,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>
         <Button x:Name="playBtn" Content="Play" HorizontalAlignment="Left" Margin="110,313,0,0" VerticalAlignment="Top" Width="75" Click="playBtn_Click"/>
-        <StackPanel x:Name="radioStackPanel" HorizontalAlignment="Left" Margin="220,313,0,-40" Orientation="Horizontal">
-            <RadioButton Content="1"  Margin="0,0,15,0" Checked="RadioButton_Checked"/>
-            <RadioButton Content="2" Margin="0,0,15,0" Checked="RadioButton_Checked"/>
-            <RadioButton Content="3" Margin="0,0,15,0" Checked="RadioButton_Checked"/>
-            <RadioButton Content="4" Margin="0,0,15,0" Checked="RadioButton_Checked"/>
-            <RadioButton Content="5" Margin="0,0,15,0" Checked="RadioButton_Checked"/>
+        <StackPanel x:Name="radioStackPanel" HorizontalAlignment="Left" Margin="42,106,0,42" Orientation="Horizontal">
+            <local:CustomSlider x:Name="answerSlider" SliderValueChanged="CustomSlider_SliderValueChanged"/>
         </StackPanel>
     </Grid>
 </UserControl>

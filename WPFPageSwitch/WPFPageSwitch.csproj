@@ -51,6 +51,7 @@
       <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="NHibernate, Version=4.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\NHibernate.4.1.1.4000\lib\net40\NHibernate.dll</HintPath>
@@ -94,6 +95,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Menu\AfterSpundHear.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Menu\CustomSlider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -153,6 +158,9 @@
     </Compile>
     <Compile Include="Menu\AfterSpundHear.xaml.cs">
       <DependentUpon>AfterSpundHear.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\CustomSlider.xaml.cs">
+      <DependentUpon>CustomSlider.xaml</DependentUpon>
     </Compile>
     <Compile Include="Menu\MyProcesses.xaml.cs">
       <DependentUpon>MyProcesses.xaml</DependentUpon>

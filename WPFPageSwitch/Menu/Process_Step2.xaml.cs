@@ -60,7 +60,7 @@ namespace WPFPageSwitch
             freqTxt.Text = AvailableSounds[index].Frequency.ToString();
             frequency = (float)AvailableSounds[index].Frequency;
 
-            VolumeTxt.Text = AvailableSounds[index].Volume.ToString();
+            //VolumeTxt.Text = AvailableSounds[index].Volume.ToString();
             volume = (float)(AvailableSounds[index].Volume / 100);
 
             NameTxt.Text = AvailableSounds[index].Name.ToString();
@@ -102,7 +102,7 @@ namespace WPFPageSwitch
             freqTxt.Text = AvailableSounds[index].Frequency.ToString();
             frequency = (float)AvailableSounds[index].Frequency;
 
-            VolumeTxt.Text = AvailableSounds[index].Volume.ToString();
+            //VolumeTxt.Text = AvailableSounds[index].Volume.ToString();
             volume = (float)(AvailableSounds[index].Volume / 100);
 
             NameTxt.Text = AvailableSounds[index].Name.ToString();
@@ -119,12 +119,6 @@ namespace WPFPageSwitch
             soundServiceSingleton.Play(frequency, volume);
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-            nextBtn.IsEnabled = true;
-            selectedCheckbox = sender as RadioButton;
-        }
-
         
         void CreateMeasurementObject()
         {
@@ -139,7 +133,7 @@ namespace WPFPageSwitch
             Sound currentSound = AvailableSounds[index];            
             SoundHeard soundHeard = new SoundHeard();
             soundHeard.Sound = currentSound;
-            soundHeard.Answer = 5;
+            soundHeard.Answer = (int)answerSlider.Value;
 
             myCurrentMeasurement.Sounds.Add(soundHeard);
         }
@@ -151,6 +145,11 @@ namespace WPFPageSwitch
             MeasurementRepositorySingleton.Instance.Flush();
 
             return myCurrentMeasurement.Id;
+        }
+
+        private void CustomSlider_SliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            nextBtn.IsEnabled = true;
         }
     }
 }
