@@ -32,8 +32,6 @@ namespace WPFPageSwitch
         ISoundService soundServiceSingleton;
 
         Measurement myCurrentMeasurement;
-
-        RadioButton selectedCheckbox;
         public Process_Step2()
 		{
 			InitializeComponent();
@@ -84,11 +82,6 @@ namespace WPFPageSwitch
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
             soundServiceSingleton.Stop();
-            if(selectedCheckbox != null)
-            {
-                selectedCheckbox.IsChecked = false;
-            }
-
             SaveAnswer();
 
             index++;

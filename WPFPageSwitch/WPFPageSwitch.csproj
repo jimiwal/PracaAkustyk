@@ -234,6 +234,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ExcelExporter\ExcelExporter.csproj">
+      <Project>{8d5af97b-33fc-4d45-9142-5cfe6d3c09a8}</Project>
+      <Name>ExcelExporter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MeasurementDomain.Infrastructure\MeasurementDomain.Infrastructure.csproj">
       <Project>{EB22BC46-FC60-4824-B4E5-6F2EC6F13A7C}</Project>
       <Name>MeasurementDomain.Infrastructure</Name>

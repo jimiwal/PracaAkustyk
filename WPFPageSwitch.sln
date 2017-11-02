@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserDomain.Services", "User
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilityComponent", "UtilityComponent\UtilityComponent.csproj", "{68A61F4F-7791-48E2-A9CE-D67048F91FB1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelExporter", "ExcelExporter\ExcelExporter.csproj", "{8D5AF97B-33FC-4D45-9142-5CFE6D3C09A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug Without Tests|Any CPU = Debug Without Tests|Any CPU
@@ -143,6 +145,12 @@ Global
 		{68A61F4F-7791-48E2-A9CE-D67048F91FB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68A61F4F-7791-48E2-A9CE-D67048F91FB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68A61F4F-7791-48E2-A9CE-D67048F91FB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D5AF97B-33FC-4D45-9142-5CFE6D3C09A8}.Debug Without Tests|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D5AF97B-33FC-4D45-9142-5CFE6D3C09A8}.Debug Without Tests|Any CPU.Build.0 = Debug|Any CPU
+		{8D5AF97B-33FC-4D45-9142-5CFE6D3C09A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D5AF97B-33FC-4D45-9142-5CFE6D3C09A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D5AF97B-33FC-4D45-9142-5CFE6D3C09A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D5AF97B-33FC-4D45-9142-5CFE6D3C09A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -162,6 +170,7 @@ Global
 		{26E33B33-0193-43CA-ADE5-7BC12BE2C683} = {8E2E5130-806D-4A03-8B2A-9BF5CB1D2E69}
 		{897ED3D2-226E-41D5-B161-76E764B31B03} = {8E2E5130-806D-4A03-8B2A-9BF5CB1D2E69}
 		{68A61F4F-7791-48E2-A9CE-D67048F91FB1} = {0B126EC1-4B6E-4190-ABEC-77A10AD3788E}
+		{8D5AF97B-33FC-4D45-9142-5CFE6D3C09A8} = {0B126EC1-4B6E-4190-ABEC-77A10AD3788E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Validation.6.0.1304.0\lib\NET45

@@ -94,5 +94,16 @@ namespace WPFPageSwitch
                 handler(this, e);
             }
         }
+
+        //export to excel
+        private void button1_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            ExcelExporter.Exporter exporter = new ExcelExporter.Exporter();
+
+            if (SelectedMeasurement != null)
+            {
+                exporter.ExportList(SelectedMeasurement.Sounds);
+            }
+        }
     }
 }
