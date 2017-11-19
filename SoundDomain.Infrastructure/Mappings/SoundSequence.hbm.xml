@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="SoundDomain.Model.Entities"
+                    assembly="SoundDomain.Model">
+  <class name="SoundSequence" table="SoundSequence">
+    <id name="Id" column="Id" type="Int32" unsaved-value ="0">
+      <!-- using native Id generator requires property name="connection.release_mode" -> on_close in nH config !!! -->
+      <generator class="native" >
+      </generator>
+    </id>
+    <property name="Name" lazy="false" unique="true"></property>
+
+    <bag name="Sounds" lazy="false" cascade ="all-delete-orphan">
+      <key column="fk_MeasurementId"/>
+      <one-to-many class="SoundDomain.Model.Entities.SoundHeard"/>
+    </bag>
+
+    <many-to-one name="User" class="UserDomain.Model.Entities.User"
+                 column ="fk_UserId" unique="false" cascade="none"
+                 fetch ="join" lazy ="false" update="false" not-null="true"/>
+  </class>
+</hibernate-mapping>

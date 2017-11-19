@@ -76,6 +76,24 @@ namespace SoundDomain.Services
 
             return userSoundList;
         }
+
+        public void SaveSoundSequence(SoundSequence soundSequence)
+        {
+            SoundSequenceRepositorySingleton.Instance.Save(soundSequence);
+            SoundSequenceRepositorySingleton.Instance.Flush();
+        }
+
+        public IList<string> GetAllSoundSequences()
+        {
+            var query = SoundSequenceRepositorySingleton.Instance.Session.QueryOver<SoundSequence>();
+            return query.Select(x => x.Name).List<string>();
+        }
+
+        public SoundSequence GetSoundSequenceByName(string name)
+        {
+            var query = SoundSequenceRepositorySingleton.Instance.Session.QueryOver<SoundSequence>();
+            return query.Where(x => x.Name.Equals(name)).Select(x => x).SingleOrDefault<SoundSequence>();
+        }
     }
 
     public sealed class SoundServiceSingleton

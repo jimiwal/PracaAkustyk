@@ -92,6 +92,9 @@ namespace WPFPageSwitch
                 return;
             }
 
+            //clear answear
+            answerSlider.Value = 0;
+
             freqTxt.Text = AvailableSounds[index].Frequency.ToString();
             frequency = (float)AvailableSounds[index].Frequency;
 

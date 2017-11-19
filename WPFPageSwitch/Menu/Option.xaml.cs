@@ -31,6 +31,8 @@ namespace WPFPageSwitch
 			InitializeComponent();
             AvailableSounds = new ObservableCollection<Sound>();
             SoundsInProcess = new ObservableCollection<Sound>();
+            SoundsInSequence = new ObservableCollection<Sound>();
+            SequencesNames = new ObservableCollection<string>();
 
             this.Loaded += Option_Loaded;
             this.DataContext = this;
@@ -57,6 +59,20 @@ namespace WPFPageSwitch
             }
         }
 
+        private string sequenceName;
+        public string SequenceName
+        {
+            get
+            {
+                return sequenceName;
+            }
+            set
+            {
+                sequenceName = value;
+                OnPropertyChanged("SequenceName");
+            }
+        }
+
         public string SoundInProcessForUser
         {
             get
@@ -76,17 +92,24 @@ namespace WPFPageSwitch
         public System.Collections.ObjectModel.ObservableCollection<Sound> AvailableSounds { get; set; }
 
         public System.Collections.ObjectModel.ObservableCollection<Sound> SoundsInProcess { get; set; }
+        public System.Collections.ObjectModel.ObservableCollection<Sound>  SoundsInSequence { get; set; }
+        public System.Collections.ObjectModel.ObservableCollection<string>  SequencesNames {get;set;}
 
-        private void Option_Loaded(object sender, RoutedEventArgs e)
+    private void Option_Loaded(object sender, RoutedEventArgs e)
         {
             var sounds = SoundRepositorySingleton.Instance.FindAll().ToList();
             sounds.ForEach(x => AvailableSounds.Add(x));
 
+            //Old
             if(UserService.SelectedUser != null)
             {
                 var userSoundList = SoundServiceSingleton.Instance.GetSoundsForUser(UserService.SelectedUser);
                 userSoundList.ForEach(x => SoundsInProcess.Add(x));
-            }            
+            }
+
+            SequencesNames.Clear();
+            var soundSequences = SoundServiceSingleton.Instance.GetAllSoundSequences();
+            soundSequences.ForEach(x => SequencesNames.Add(x));
         }
 
         #region ISwitchable Members
@@ -116,14 +139,24 @@ namespace WPFPageSwitch
         //move to sound in process
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
+            //if (listView.SelectedItem == null) return;
+
+            //var selectedSound = listView.SelectedItem as Sound;
+            //int indexOf = SoundsInProcess.IndexOf(selectedSound);
+
+            //if(indexOf == -1)
+            //{
+            //    SoundsInProcess.Add(selectedSound);
+            //}
+
             if (listView.SelectedItem == null) return;
 
             var selectedSound = listView.SelectedItem as Sound;
-            int indexOf = SoundsInProcess.IndexOf(selectedSound);
+            int indexOf = SoundsInSequence.IndexOf(selectedSound);
 
             if(indexOf == -1)
             {
-                SoundsInProcess.Add(selectedSound);
+                SoundsInSequence.Add(selectedSound);
             }
 
         }

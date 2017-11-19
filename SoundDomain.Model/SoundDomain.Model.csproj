@@ -40,9 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\SoundSequence.cs" />
     <Compile Include="Entities\SoundSetting.cs" />
     <Compile Include="RepositoryInterfaces\ISoundHeardRepository.cs" />
     <Compile Include="RepositoryInterfaces\ISoundRepository.cs" />
+    <Compile Include="RepositoryInterfaces\ISoundSequenceRepository.cs" />
     <Compile Include="RepositoryInterfaces\ISoundSettingRepository.cs" />
     <Compile Include="ValueObjects\Sound.cs" />
     <Compile Include="Entities\SoundHeard.cs" />

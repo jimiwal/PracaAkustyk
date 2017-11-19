@@ -51,9 +51,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\SoundHeardRepository.cs" />
     <Compile Include="Repositories\SoundRepository.cs" />
+    <Compile Include="Repositories\SoundSequenceRepository.cs" />
     <Compile Include="Repositories\SoundSettingRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\SoundSequence.hbm.xml" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mappings\Sound.hbm.xml" />
   </ItemGroup>
