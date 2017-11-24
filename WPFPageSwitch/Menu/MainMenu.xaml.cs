@@ -106,7 +106,7 @@ namespace WPFPageSwitch
 
         private void sequenceButton_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new SequencesDefinition());
+            Switcher.Switch(new Option());
         }
     }
 }

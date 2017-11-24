@@ -131,7 +131,7 @@ namespace WPFPageSwitch
                 isUserSequence = value;
                 OnPropertyChanged("IsUserSequence");
             }
-        }
+        }        
 
         public string SoundInProcessForUser
         {
@@ -225,7 +225,7 @@ namespace WPFPageSwitch
         private void button3_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedSequence == null)
-            {
+            {//add new sequence
                 //SoundServiceSingleton.Instance.RemoveAllSoundsForUser(UserService.SelectedUser);
                 SoundSequence soundSequence = new SoundSequence();
                 foreach (var sound in SoundsInSequence)
@@ -245,10 +245,14 @@ namespace WPFPageSwitch
 
                 soundSequence.Name = SequenceName;
 
-                SoundServiceSingleton.Instance.SaveSoundSequence(soundSequence);                
+                SoundServiceSingleton.Instance.SaveSoundSequence(soundSequence);
+
+
+                //reload sequences combobox after add new
+                LoadSequences();
             }
             else
-            {
+            {//update existing
                 SelectedSequence.Name = SequenceName;
                 SelectedSequence.Sounds.Clear();
                 SoundsInSequence.ForEach(x => SelectedSequence.Sounds.Add(new SoundSetting() { Sound = x }));
@@ -269,6 +273,8 @@ namespace WPFPageSwitch
         //
         void SetSquenceInListView()
         {
+            if (selectedSequence == null) return;
+
             SoundsInSequence.Clear();
             SelectedSequence.Sounds.ForEach(x => SoundsInSequence.Add(x.Sound));
 
@@ -280,6 +286,18 @@ namespace WPFPageSwitch
             Sequences.Clear();
             var soundSequences = SoundServiceSingleton.Instance.GetAllSoundSequences();
             soundSequences.ForEach(x => Sequences.Add(x));
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new MainMenu());
+        }
+
+        private void btnAddSequence_Click(object sender, RoutedEventArgs e)
+        {
+            SelectedSequence = null;
+            SoundsInSequence.Clear();
+            SequenceName = string.Empty;
         }
     }
 }

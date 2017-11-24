@@ -31,6 +31,7 @@ namespace WPFPageSwitch.Menu
 
             AvailableSounds = new System.Collections.ObjectModel.ObservableCollection<Sound>();
             this.Loaded += BaseSoundsDefinition_Loaded;
+            this.DataContext = this;
         }
 
         private void BaseSoundsDefinition_Loaded(object sender, RoutedEventArgs e)
@@ -118,10 +119,9 @@ namespace WPFPageSwitch.Menu
             AvailableSounds.Remove(sound);
         }
 
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             Switcher.Switch(new MainMenu());
         }
-
     }
 }

@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPFPageSwitch.Menu"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Margin="0,0,-319,-192">
+             d:DesignWidth="800" d:DesignHeight="600">
+    <Grid>
         <ListView x:Name="listView" ItemsSource="{Binding AvailableSounds}" SelectedItem="{Binding SelectedSoundGeneral}" HorizontalAlignment="Left" Height="288" Margin="42,26,0,0" VerticalAlignment="Top" Width="492" RenderTransformOrigin="-0.505,0.44">
             <ListView.View>
                 <GridView>
@@ -25,9 +25,10 @@
         <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="164,382,0,0" TextWrapping="Wrap" Text="Name (optional)" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Height="22" Margin="260,384,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="button1_Copy" Content="Remove" HorizontalAlignment="Left" Margin="280,417,0,0" VerticalAlignment="Top" Width="75" Click="button1_Copy_Click"/>
+        <Button x:Name="btnBack" Content="Cofnij" HorizontalAlignment="Left" Margin="715,568,0,0" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
 
 
-        <Button Height="25" HorizontalAlignment="Right" Margin="0,0,85,134" VerticalAlignment="Bottom" Width="100" Content="&lt; Back" Click="Button_Click"/>
+
 
     </Grid>
 </UserControl>

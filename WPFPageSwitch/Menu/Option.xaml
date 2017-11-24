@@ -10,7 +10,7 @@
     <Grid x:Name="LayoutRoot" Background="White">
         <TextBlock Height="40" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="200" Text="Option" TextWrapping="Wrap" FontSize="21.333"/>
         <Button Height="25" HorizontalAlignment="Right" Margin="0,0,20,20" VerticalAlignment="Bottom" Width="100" Content="&lt; Back" Click="Button_Click"/>
-        <Grid Background="#FFE5E5E5">
+        <Grid Background="#FFE5E5E5" Height="600" VerticalAlignment="Bottom">
             <ListView x:Name="listView" ItemsSource="{Binding AvailableSounds}" SelectedItem="{Binding SelectedSoundGeneral}" HorizontalAlignment="Left" Height="494" Margin="10,26,0,0" VerticalAlignment="Top" Width="310" RenderTransformOrigin="-0.505,0.44">
                 <ListView.View>
                     <GridView>
@@ -20,11 +20,11 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button IsEnabled="{Binding IsUserSelected, Mode=OneWay}" x:Name="button" Content=">>>>" HorizontalAlignment="Left" Margin="342,172,0,0" VerticalAlignment="Top" Width="74" Click="button_Click_1"/>
-            <Button x:Name="button1" Content="Usuń sekwencję" HorizontalAlignment="Left" Margin="612,407,0,0" VerticalAlignment="Top" Width="107" Click="button1_Click" RenderTransformOrigin="-0.16,0.864"/>
+            <Button x:Name="button" Content=">>>>" HorizontalAlignment="Left" Margin="342,172,0,0" VerticalAlignment="Top" Width="74" Click="button_Click_1"/>
+            <Button x:Name="button1" Content="Usuń sekwencję" HorizontalAlignment="Left" Margin="612,491,0,0" VerticalAlignment="Top" Width="107" Click="button1_Click" RenderTransformOrigin="-0.16,0.864"/>
             <Label x:Name="label" Content="Wszystkie dźwięki" HorizontalAlignment="Left" Margin="72,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.763,0.739"/>
-            <Label x:Name="label_Copy" Content="{Binding SoundInProcessForUser}" HorizontalAlignment="Left" Margin="406,0,0,426" VerticalAlignment="Bottom" RenderTransformOrigin="0.763,0.739" Height="26"/>
-            <ListView x:Name="sequenceListView" ItemsSource="{Binding SoundsInSequence}" SelectedItem="{Binding SelectedSoundInSequence}" HorizontalAlignment="Left" Height="297" Margin="437,49,0,0" VerticalAlignment="Top" Width="282" RenderTransformOrigin="-0.505,0.44">
+            <Label x:Name="label_Copy" Content="{Binding SoundInProcessForUser}" HorizontalAlignment="Left" Margin="437,0,0,548" VerticalAlignment="Bottom" RenderTransformOrigin="0.763,0.739" Height="26"/>
+            <ListView x:Name="sequenceListView" ItemsSource="{Binding SoundsInSequence}" SelectedItem="{Binding SelectedSoundInSequence}" HorizontalAlignment="Left" Height="297" Margin="437,133,0,0" VerticalAlignment="Top" Width="327" RenderTransformOrigin="-0.505,0.44">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Name" Width="90" DisplayMemberBinding="{Binding Name}" />
@@ -44,7 +44,7 @@
                     </Style>
                 </ListView.ItemContainerStyle>
             </ListView>
-            <ComboBox x:Name="comboBox" ItemsSource="{Binding Sequences}" SelectedItem="{Binding SelectedSequence}" HorizontalAlignment="Left" Margin="507,22,0,0" VerticalAlignment="Top" Width="212">
+            <ComboBox x:Name="comboBox" ItemsSource="{Binding Sequences}" SelectedItem="{Binding SelectedSequence}" HorizontalAlignment="Left" Margin="578,106,0,0" VerticalAlignment="Top" Width="186">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -53,11 +53,13 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <Label x:Name="label1" Content="Sekwencje" HorizontalAlignment="Left" Margin="437,22,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="599,348,0,0" TextWrapping="Wrap" Text="{Binding SequenceName}" VerticalAlignment="Top" Width="120"/>
-            <Label x:Name="label3" Content="Nazwa sekwencji" HorizontalAlignment="Left" Margin="495,345,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="button3" Content="Zapisz sekwencję" HorizontalAlignment="Left" Margin="474,407,0,0" VerticalAlignment="Top" Width="120" Click="button3_Click"/>
-            <CheckBox x:Name="checkBox" IsChecked="{Binding IsUserSequence}" Content="Sekwencja użytkownika" HorizontalAlignment="Left" Margin="578,381,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label1" Content="Sekwencje" HorizontalAlignment="Left" Margin="508,102,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.292,0.462"/>
+            <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="599,432,0,0" TextWrapping="Wrap" Text="{Binding SequenceName}" VerticalAlignment="Top" Width="120"/>
+            <Label x:Name="label3" Content="Nazwa sekwencji" HorizontalAlignment="Left" Margin="495,429,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="button3" Content="Zapisz sekwencję" HorizontalAlignment="Left" Margin="474,491,0,0" VerticalAlignment="Top" Width="120" Click="button3_Click"/>
+            <CheckBox x:Name="checkBox" IsEnabled="{Binding IsUserSelected, Mode=OneWay}" IsChecked="{Binding IsUserSequence}" Content="Sekwencja użytkownika" HorizontalAlignment="Left" Margin="578,465,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="btnBack" Content="Cofnij" HorizontalAlignment="Left" Margin="715,568,0,0" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
+            <Button x:Name="btnAddSequence" FontSize="20" Content="+" HorizontalAlignment="Left" Margin="465,90,0,0" VerticalAlignment="Top" Width="38" Height="38" Click="btnAddSequence_Click"/>
 
         </Grid>
 
