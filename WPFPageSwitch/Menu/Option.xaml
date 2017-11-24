@@ -10,64 +10,56 @@
     <Grid x:Name="LayoutRoot" Background="White">
         <TextBlock Height="40" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="200" Text="Option" TextWrapping="Wrap" FontSize="21.333"/>
         <Button Height="25" HorizontalAlignment="Right" Margin="0,0,20,20" VerticalAlignment="Bottom" Width="100" Content="&lt; Back" Click="Button_Click"/>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="484" Margin="30,48,0,0" VerticalAlignment="Top" Width="750">
-            <TabItem Header="General">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="Sounds">
-                <Grid Background="#FFE5E5E5">
+        <Grid Background="#FFE5E5E5">
+            <ListView x:Name="listView" ItemsSource="{Binding AvailableSounds}" SelectedItem="{Binding SelectedSoundGeneral}" HorizontalAlignment="Left" Height="494" Margin="10,26,0,0" VerticalAlignment="Top" Width="310" RenderTransformOrigin="-0.505,0.44">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Frequency" Width="100" DisplayMemberBinding="{Binding Frequency}" />
+                        <GridViewColumn Header="Volume" Width="100" DisplayMemberBinding="{Binding Volume}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button IsEnabled="{Binding IsUserSelected, Mode=OneWay}" x:Name="button" Content=">>>>" HorizontalAlignment="Left" Margin="342,172,0,0" VerticalAlignment="Top" Width="74" Click="button_Click_1"/>
+            <Button x:Name="button1" Content="Usuń sekwencję" HorizontalAlignment="Left" Margin="612,407,0,0" VerticalAlignment="Top" Width="107" Click="button1_Click" RenderTransformOrigin="-0.16,0.864"/>
+            <Label x:Name="label" Content="Wszystkie dźwięki" HorizontalAlignment="Left" Margin="72,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.763,0.739"/>
+            <Label x:Name="label_Copy" Content="{Binding SoundInProcessForUser}" HorizontalAlignment="Left" Margin="406,0,0,426" VerticalAlignment="Bottom" RenderTransformOrigin="0.763,0.739" Height="26"/>
+            <ListView x:Name="sequenceListView" ItemsSource="{Binding SoundsInSequence}" SelectedItem="{Binding SelectedSoundInSequence}" HorizontalAlignment="Left" Height="297" Margin="437,49,0,0" VerticalAlignment="Top" Width="282" RenderTransformOrigin="-0.505,0.44">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" Width="90" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Frequency" Width="90" DisplayMemberBinding="{Binding Frequency}" />
+                        <GridViewColumn Header="Volume" Width="90" DisplayMemberBinding="{Binding Volume}" />
+                    </GridView>
+                </ListView.View>
+                <ListView.Resources>
+                    <ContextMenu x:Key="ItemContextMenu">
+                        <MenuItem Header="Usuń dźwięk" Command="{Binding Path=DataContext.DeleteSoundFromSequence, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" Background="WhiteSmoke" />
+                    </ContextMenu>
+                </ListView.Resources>
 
-                    <ListView x:Name="listView" ItemsSource="{Binding AvailableSounds}" SelectedItem="{Binding SelectedSoundGeneral}" HorizontalAlignment="Left" Height="288" Margin="10,26,0,0" VerticalAlignment="Top" Width="310" RenderTransformOrigin="-0.505,0.44">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}" />
-                                <GridViewColumn Header="Frequency" Width="100" DisplayMemberBinding="{Binding Frequency}" />
-                                <GridViewColumn Header="Volume" Width="100" DisplayMemberBinding="{Binding Volume}" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}" >
+                        <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+            <ComboBox x:Name="comboBox" ItemsSource="{Binding Sequences}" SelectedItem="{Binding SelectedSequence}" HorizontalAlignment="Left" Margin="507,22,0,0" VerticalAlignment="Top" Width="212">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Label x:Name="label1" Content="Sekwencje" HorizontalAlignment="Left" Margin="437,22,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="599,348,0,0" TextWrapping="Wrap" Text="{Binding SequenceName}" VerticalAlignment="Top" Width="120"/>
+            <Label x:Name="label3" Content="Nazwa sekwencji" HorizontalAlignment="Left" Margin="495,345,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="button3" Content="Zapisz sekwencję" HorizontalAlignment="Left" Margin="474,407,0,0" VerticalAlignment="Top" Width="120" Click="button3_Click"/>
+            <CheckBox x:Name="checkBox" IsChecked="{Binding IsUserSequence}" Content="Sekwencja użytkownika" HorizontalAlignment="Left" Margin="578,381,0,0" VerticalAlignment="Top"/>
 
-                    <ListView x:Name="listViewInProcess" ItemsSource="{Binding SoundsInProcess}" HorizontalAlignment="Left" Height="297" Margin="404,49,0,0" VerticalAlignment="Top" Width="28" RenderTransformOrigin="-0.505,0.44">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Name" Width="90" DisplayMemberBinding="{Binding Name}" />
-                                <GridViewColumn Header="Frequency" Width="90" DisplayMemberBinding="{Binding Frequency}" />
-                                <GridViewColumn Header="Volume" Width="90" DisplayMemberBinding="{Binding Volume}" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+        </Grid>
 
-                    <Button IsEnabled="{Binding IsUserSelected, Mode=OneWay}" x:Name="button" Content=">>>>" HorizontalAlignment="Left" Margin="325,173,0,0" VerticalAlignment="Top" Width="74" Click="button_Click_1"/>
-                    <Button x:Name="button1" Content="X" HorizontalAlignment="Left" Margin="406,352,0,0" VerticalAlignment="Top" Width="26" Click="button1_Click" RenderTransformOrigin="-0.16,0.864"/>
-                    <Label x:Name="label" Content="Wszystkie dźwięki" HorizontalAlignment="Left" Margin="72,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.763,0.739"/>
-                    <Label x:Name="label_Copy" Content="{Binding SoundInProcessForUser}" HorizontalAlignment="Left" Margin="406,0,0,426" VerticalAlignment="Bottom" RenderTransformOrigin="0.763,0.739" Height="26"/>
-                    <Button x:Name="button2" Content="Add" HorizontalAlignment="Left" Margin="110,407,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.653,0.835" Click="button2_Click"/>
-                    <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="14,323,0,0" TextWrapping="Wrap" Text="Frequency" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="110,323,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
-                    <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="14,351,0,0" TextWrapping="Wrap" Text="Volume (1 - 100)" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="110,351,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
-                    <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="14,378,0,0" TextWrapping="Wrap" Text="Name (optional)" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Height="23" Margin="110,379,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
-                    <Button x:Name="button1_Copy" Content="Remove" HorizontalAlignment="Left" Margin="245,407,0,0" VerticalAlignment="Top" Width="75" Click="button1_Copy_Click"/>
-                    <ListView x:Name="sequenceListView" ItemsSource="{Binding SoundsInSequence}" HorizontalAlignment="Left" Height="297" Margin="437,49,0,0" VerticalAlignment="Top" Width="282" RenderTransformOrigin="-0.505,0.44">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Name" Width="90" DisplayMemberBinding="{Binding Name}" />
-                                <GridViewColumn Header="Frequency" Width="90" DisplayMemberBinding="{Binding Frequency}" />
-                                <GridViewColumn Header="Volume" Width="90" DisplayMemberBinding="{Binding Volume}" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                    <ComboBox x:Name="comboBox" ItemsSource="{Binding SequencesNames}" HorizontalAlignment="Left" Margin="507,22,0,0" VerticalAlignment="Top" Width="212">
-                        <Label x:Name="label2" Content="Label"/>
-                    </ComboBox>
-                    <Label x:Name="label1" Content="Sekwencje" HorizontalAlignment="Left" Margin="437,22,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="599,348,0,0" TextWrapping="Wrap" Text="{Binding SequenceName}" VerticalAlignment="Top" Width="120"/>
-                    <Label x:Name="label3" Content="Nazwa sekwencji" HorizontalAlignment="Left" Margin="495,345,0,0" VerticalAlignment="Top"/>
-                    <Button x:Name="button3" Content="Zapisz sekwencję" HorizontalAlignment="Left" Margin="599,380,0,0" VerticalAlignment="Top" Width="120"/>
-
-                </Grid>
-            </TabItem>
-        </TabControl>
     </Grid>
 </UserControl>

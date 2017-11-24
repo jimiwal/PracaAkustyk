@@ -11,8 +11,8 @@
     <property name="Name" lazy="false" unique="true"></property>
 
     <bag name="Sounds" lazy="false" cascade ="all-delete-orphan">
-      <key column="fk_MeasurementId"/>
-      <one-to-many class="SoundDomain.Model.Entities.SoundHeard"/>
+      <key column="fk_SoundSequence"/>
+      <one-to-many class="SoundDomain.Model.Entities.SoundSetting"/>
     </bag>
 
     <many-to-one name="User" class="UserDomain.Model.Entities.User"

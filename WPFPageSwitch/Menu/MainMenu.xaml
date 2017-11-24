@@ -61,7 +61,7 @@
 	<Grid x:Name="mainMenuLayoutRoot" Background="White">
 		<Button x:Name="newProcessBtn" HorizontalAlignment="Left" Margin="120,0,0,218" VerticalAlignment="Bottom" Width="200" Content="Nowe Badanie" Height="40" FontSize="21.333" Click="newGameButton_Click"/>
 		<Button x:Name="myProcessesBtn" Height="40" HorizontalAlignment="Left" Margin="120,0,0,170" VerticalAlignment="Bottom" Width="200" FontSize="21.333" Content="Moje Badania" Click="loadGameButton_Click"/>
-		<Button x:Name="optionButton" Height="40" HorizontalAlignment="Left" Margin="120,0,0,122" VerticalAlignment="Bottom" Width="200" FontSize="21.333" Content="Option" Click="optionButton_Click"/>
+		<Button x:Name="optionButton" Height="40" HorizontalAlignment="Left" Margin="120,0,0,122" VerticalAlignment="Bottom" Width="200" FontSize="21.333" Content="Dźwięki bazowe" Click="optionButton_Click"/>
 		<TextBlock x:Name="registerTextBlock" HorizontalAlignment="Right" Margin="0,52,20,0" VerticalAlignment="Top" Text="Create new user" TextWrapping="Wrap" FontSize="16" Width="100" Height="25" TextAlignment="Right" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="registerTextBlock_MouseLeftButtonDown">
 			<TextBlock.RenderTransform>
 				<TransformGroup>
@@ -83,5 +83,6 @@
 			</TextBlock.RenderTransform>
 		</TextBlock>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="{Binding UserLabel}" VerticalAlignment="Top"/>
+        <Button x:Name="sequenceButton" Height="40" HorizontalAlignment="Left" Margin="120,0,0,77" VerticalAlignment="Bottom" Width="200" FontSize="21.333" Content="Sekwencje" Click="sequenceButton_Click" />
     </Grid>
 </UserControl>

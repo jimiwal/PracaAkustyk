@@ -30,12 +30,28 @@ namespace WPFPageSwitch
 			// Required to initialize variables
 			InitializeComponent();
             AvailableSounds = new ObservableCollection<Sound>();
-            SoundsInProcess = new ObservableCollection<Sound>();
             SoundsInSequence = new ObservableCollection<Sound>();
-            SequencesNames = new ObservableCollection<string>();
+            Sequences = new ObservableCollection<SoundSequence>();
 
             this.Loaded += Option_Loaded;
             this.DataContext = this;
+        }
+
+        private ICommand _clickCommand;
+        public ICommand DeleteSoundFromSequence
+        {
+            get
+            {
+                return _clickCommand ?? (_clickCommand = new CommandHandler(() => DeleteSelectedSoundFromSequenceAction(), true));
+            }
+        }
+        public void DeleteSelectedSoundFromSequenceAction()
+        {
+            if(SelectedSoundInSequence != null)
+            {
+                SoundsInSequence.Remove(SelectedSoundInSequence);
+                SelectedSoundInSequence = null;
+            }
         }
 
         public bool IsUserSelected
@@ -73,6 +89,50 @@ namespace WPFPageSwitch
             }
         }
 
+        private SoundSequence selectedSequence;
+        public SoundSequence SelectedSequence
+        {
+            get
+            {
+                return selectedSequence;
+            }
+            set
+            {
+                selectedSequence = value;
+                OnPropertyChanged("SelectedSequence");
+
+                SetSquenceInListView();
+            }
+        }
+
+        private Sound selectedSoundInSequence;
+        public Sound SelectedSoundInSequence
+        {
+            get
+            {
+                return selectedSoundInSequence;
+            }
+            set
+            {
+                selectedSoundInSequence = value;
+                OnPropertyChanged("SelectedSoundInSequence");                
+            }
+        }
+
+        bool? isUserSequence;
+        public bool? IsUserSequence
+        {
+            get
+            {
+                return isUserSequence;
+            }
+            set
+            {
+                isUserSequence = value;
+                OnPropertyChanged("IsUserSequence");
+            }
+        }
+
         public string SoundInProcessForUser
         {
             get
@@ -88,28 +148,16 @@ namespace WPFPageSwitch
             }
         }
 
-
         public System.Collections.ObjectModel.ObservableCollection<Sound> AvailableSounds { get; set; }
-
-        public System.Collections.ObjectModel.ObservableCollection<Sound> SoundsInProcess { get; set; }
         public System.Collections.ObjectModel.ObservableCollection<Sound>  SoundsInSequence { get; set; }
-        public System.Collections.ObjectModel.ObservableCollection<string>  SequencesNames {get;set;}
+        public System.Collections.ObjectModel.ObservableCollection<SoundSequence> Sequences { get;set;}
 
     private void Option_Loaded(object sender, RoutedEventArgs e)
         {
             var sounds = SoundRepositorySingleton.Instance.FindAll().ToList();
             sounds.ForEach(x => AvailableSounds.Add(x));
 
-            //Old
-            if(UserService.SelectedUser != null)
-            {
-                var userSoundList = SoundServiceSingleton.Instance.GetSoundsForUser(UserService.SelectedUser);
-                userSoundList.ForEach(x => SoundsInProcess.Add(x));
-            }
-
-            SequencesNames.Clear();
-            var soundSequences = SoundServiceSingleton.Instance.GetAllSoundSequences();
-            soundSequences.ForEach(x => SequencesNames.Add(x));
+            LoadSequences();
         }
 
         #region ISwitchable Members
@@ -120,34 +168,14 @@ namespace WPFPageSwitch
         
         //back, save changes
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            if(UserService.SelectedUser != null)
-            {
-                SoundServiceSingleton.Instance.RemoveAllSoundsForUser(UserService.SelectedUser);
-
-                foreach (var sound in SoundsInProcess)
-                {
-                    SoundSetting soundSetting = new SoundSetting() { Sound = sound, User = UserService.SelectedUser };
-
-                    SoundServiceSingleton.Instance.SaveSoundSettings(soundSetting);                    
-                }
-            }            
+        {            
             Switcher.Switch(new MainMenu());
         }
         #endregion
 
-        //move to sound in process
+        //move sound to sequence
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
-            //if (listView.SelectedItem == null) return;
-
-            //var selectedSound = listView.SelectedItem as Sound;
-            //int indexOf = SoundsInProcess.IndexOf(selectedSound);
-
-            //if(indexOf == -1)
-            //{
-            //    SoundsInProcess.Add(selectedSound);
-            //}
 
             if (listView.SelectedItem == null) return;
 
@@ -161,32 +189,12 @@ namespace WPFPageSwitch
 
         }
 
-        //remove sound from process
+        //remove sequence
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            if (listViewInProcess.SelectedItem == null) return;
 
-            var selectedSound = listViewInProcess.SelectedItem as Sound;
-            SoundsInProcess.Remove(selectedSound);
         }
 
-        //Add Sound to list new
-        private void button2_Click(object sender, RoutedEventArgs e)
-        {
-            double frequency = Convert.ToDouble(textBox.Text);
-            double volume = Convert.ToDouble(textBox_Copy.Text);
-            string name = textBox_Copy1.Text;
-            var sound = new Sound()
-            {
-                Frequency = frequency,
-                Volume = volume,
-                Name = name
-            };
-
-            SoundRepositorySingleton.Instance.Save(sound);
-            AvailableSounds.Add(sound);
-            SoundRepositorySingleton.Instance.Flush();
-        }
 
         //remove sound from list general
         private void button1_Copy_Click(object sender, RoutedEventArgs e)
@@ -194,12 +202,12 @@ namespace WPFPageSwitch
             if (listView.SelectedItem == null)
                 return;
 
-            var sound = listView.SelectedItem as Sound;
-
-            AvailableSounds.Remove(sound);
+            var sound = listView.SelectedItem as Sound;            
 
             SoundRepositorySingleton.Instance.Remove(sound);
             SoundRepositorySingleton.Instance.Flush();
+
+            AvailableSounds.Remove(sound);
         }
 
         void OnPropertyChanged(String prop)
@@ -212,5 +220,66 @@ namespace WPFPageSwitch
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
+
+        //save sequence
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedSequence == null)
+            {
+                //SoundServiceSingleton.Instance.RemoveAllSoundsForUser(UserService.SelectedUser);
+                SoundSequence soundSequence = new SoundSequence();
+                foreach (var sound in SoundsInSequence)
+                {
+                    SoundSetting soundSetting = new SoundSetting() { Sound = sound };
+                    soundSequence.Sounds.Add(soundSetting);
+                }
+
+                if(IsUserSequence.HasValue && IsUserSequence.Value == true && UserService.SelectedUser != null)
+                {
+                    soundSequence.User = UserService.SelectedUser;
+                }
+                else
+                {
+                    soundSequence.User = null;
+                }
+
+                soundSequence.Name = SequenceName;
+
+                SoundServiceSingleton.Instance.SaveSoundSequence(soundSequence);                
+            }
+            else
+            {
+                SelectedSequence.Name = SequenceName;
+                SelectedSequence.Sounds.Clear();
+                SoundsInSequence.ForEach(x => SelectedSequence.Sounds.Add(new SoundSetting() { Sound = x }));
+
+                if (IsUserSequence.HasValue && IsUserSequence.Value == true && UserService.SelectedUser != null)
+                {
+                    SelectedSequence.User = UserService.SelectedUser;
+                }
+                else
+                {
+                    SelectedSequence.User = null;
+                }
+
+                SoundServiceSingleton.Instance.SaveSoundSequence(SelectedSequence);
+            }
+        }
+
+        //
+        void SetSquenceInListView()
+        {
+            SoundsInSequence.Clear();
+            SelectedSequence.Sounds.ForEach(x => SoundsInSequence.Add(x.Sound));
+
+            SequenceName = SelectedSequence.Name;
+        }
+
+        void LoadSequences()
+        {
+            Sequences.Clear();
+            var soundSequences = SoundServiceSingleton.Instance.GetAllSoundSequences();
+            soundSequences.ForEach(x => Sequences.Add(x));
+        }
     }
 }

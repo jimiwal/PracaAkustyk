@@ -98,6 +98,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Menu\BaseSoundsDefinition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Menu\CustomSlider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -146,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Menu\SequencesDefinition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageSwitcher.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -156,8 +164,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CommandHandler.cs" />
     <Compile Include="Menu\AfterSpundHear.xaml.cs">
       <DependentUpon>AfterSpundHear.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\BaseSoundsDefinition.xaml.cs">
+      <DependentUpon>BaseSoundsDefinition.xaml</DependentUpon>
     </Compile>
     <Compile Include="Menu\CustomSlider.xaml.cs">
       <DependentUpon>CustomSlider.xaml</DependentUpon>
@@ -167,6 +179,9 @@
     </Compile>
     <Compile Include="Menu\Process_Step2.xaml.cs">
       <DependentUpon>Process_Step2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\SequencesDefinition.xaml.cs">
+      <DependentUpon>SequencesDefinition.xaml</DependentUpon>
     </Compile>
     <Compile Include="NotificationObject.cs" />
     <Compile Include="PageSwitcher.xaml.cs">

@@ -36,8 +36,7 @@ namespace SoundDomain.Services
         public IList<Sound> GetSoundsForUser(User user)
         {
             IList<Sound> userSoundList;
-            var query = SoundSettingRepositorySingleton.Instance.Session.QueryOver<SoundSetting>();
-            query.Where(r => r.User.Id == UserService.SelectedUser.Id);
+            var query = SoundSettingRepositorySingleton.Instance.Session.QueryOver<SoundSetting>();            
 
             userSoundList = query
                                 .SelectList(list => list
@@ -69,7 +68,6 @@ namespace SoundDomain.Services
         {
             IList<SoundSetting> userSoundList;
             var query = SoundSettingRepositorySingleton.Instance.Session.QueryOver<SoundSetting>();
-            query.Where(r => r.User.Id == UserService.SelectedUser.Id);
 
             userSoundList = query.TransformUsing(Transformers.DistinctRootEntity)
                                 .List<SoundSetting>();
@@ -83,10 +81,10 @@ namespace SoundDomain.Services
             SoundSequenceRepositorySingleton.Instance.Flush();
         }
 
-        public IList<string> GetAllSoundSequences()
+        public IList<SoundSequence> GetAllSoundSequences()
         {
             var query = SoundSequenceRepositorySingleton.Instance.Session.QueryOver<SoundSequence>();
-            return query.Select(x => x.Name).List<string>();
+            return query.TransformUsing(Transformers.DistinctRootEntity).List<SoundSequence>();
         }
 
         public SoundSequence GetSoundSequenceByName(string name)

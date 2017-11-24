@@ -13,10 +13,10 @@ namespace SoundDomain.Model.Entities
     {
         public SoundSequence()
         {
-            Sounds = new List<Sound>();
+            Sounds = new List<SoundSetting>();
         }
         public virtual string Name { get; set; }
-        public virtual IList<Sound> Sounds { get; set; }
+        public virtual IList<SoundSetting> Sounds { get; set; }
         public virtual User User { get; set; }
     }
 }

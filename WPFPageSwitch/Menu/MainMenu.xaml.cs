@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using UserDomain.Services.DomainLayer;
+using WPFPageSwitch.Menu;
 
 namespace WPFPageSwitch
 {
@@ -61,7 +62,7 @@ namespace WPFPageSwitch
 
 		private void optionButton_Click(object sender, System.Windows.RoutedEventArgs e)
 		{
-			Switcher.Switch(new Option());
+			Switcher.Switch(new BaseSoundsDefinition());
 		}
 
         //private void ShowMessageBox(string title, string message, MessageBoxIcon icon)
@@ -102,6 +103,10 @@ namespace WPFPageSwitch
         	Switcher.Switch(new Register());
         }
         #endregion
-		
-	}
+
+        private void sequenceButton_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new SequencesDefinition());
+        }
+    }
 }

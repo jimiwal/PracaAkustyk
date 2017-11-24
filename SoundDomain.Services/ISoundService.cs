@@ -18,7 +18,7 @@ namespace SoundDomain.Services
         void RemoveAllSoundsForUser(User user); //add
 
         void SaveSoundSequence(SoundSequence soundSequence);
-        IList<string> GetAllSoundSequences();
+        IList<SoundSequence> GetAllSoundSequences();
         SoundSequence GetSoundSequenceByName(string name);
     }
 }
