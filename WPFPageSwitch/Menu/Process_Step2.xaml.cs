@@ -32,10 +32,11 @@ namespace WPFPageSwitch
         ISoundService soundServiceSingleton;
 
         Measurement myCurrentMeasurement;
-        public Process_Step2()
+        public Process_Step2(ObservableCollection<Sound> availableSounds)
 		{
-			InitializeComponent();
-            AvailableSounds = new ObservableCollection<Sound>();            
+
+            InitializeComponent();
+            AvailableSounds = availableSounds;
 
             this.DataContext = this;
 
@@ -52,9 +53,6 @@ namespace WPFPageSwitch
             radioStackPanel.IsEnabled = false;
             playBtn.IsEnabled = true;
             index = 0;
-            var sounds = soundServiceSingleton.GetSoundsForUser(UserService.SelectedUser);//SoundRepositorySingleton.Instance.FindAll().ToList();
-            sounds.ForEach(x => AvailableSounds.Add(x));
-
             freqTxt.Text = AvailableSounds[index].Frequency.ToString();
             frequency = (float)AvailableSounds[index].Frequency;
 

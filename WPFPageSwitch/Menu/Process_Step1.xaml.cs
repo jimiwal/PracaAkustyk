@@ -6,6 +6,7 @@ using SoundDomain.Model.ValueObjects;
 using SoundDomain.Services;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,23 +20,25 @@ using UserDomain.Services.DomainLayer;
 
 namespace WPFPageSwitch
 {
-	public partial class Process_Step1 : UserControl, ISwitchable
-	{
+	public partial class Process_Step1 : UserControl, ISwitchable, INotifyPropertyChanged
+    {
         private string measurementName;
 
         public Process_Step1()
 		{
 			InitializeComponent();
 
-            AvailableSounds = new ObservableCollection<Sound>();
+            SoundsInSequence = new ObservableCollection<Sound>();
+            Sequences = new ObservableCollection<SoundSequence>();
 
             this.Loaded += Process_Step1_Loaded;
             nextBtn.IsEnabled = false;
 
             this.DataContext = this;
-        }        
+        }
 
-        public System.Collections.ObjectModel.ObservableCollection<Sound> AvailableSounds { get; set; }
+        public System.Collections.ObjectModel.ObservableCollection<SoundSequence> Sequences { get; set; }
+        public System.Collections.ObjectModel.ObservableCollection<Sound> SoundsInSequence { get; set; }
 
         public string MeasurementName
         {
@@ -46,9 +49,37 @@ namespace WPFPageSwitch
 
             set
             {
-                measurementName = value;                
+                measurementName = value;
+                OnPropertyChanged("MeasurementName");             
             }
         }
+
+        private SoundSequence selectedSequence;
+        public SoundSequence SelectedSequence
+        {
+            get
+            {
+                return selectedSequence;
+            }
+            set
+            {
+                selectedSequence = value;
+                OnPropertyChanged("SelectedSequence");
+
+                SetSquenceInListView();
+            }
+        }
+
+        void OnPropertyChanged(String prop)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+
+            if (handler != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         #region ISwitchable Members
         public void UtilizeState(object state)
@@ -65,26 +96,45 @@ namespace WPFPageSwitch
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             MeasurementService.LastMeasurementName = MeasurementName;
-            Switcher.Switch(new Process_Step2());
+            Switcher.Switch(new Process_Step2(SoundsInSequence));
         }
 
         private void Process_Step1_Loaded(object sender, RoutedEventArgs e)
         {
             if(UserService.SelectedUser == null)
             {
-                AvailableSounds.Clear();
+                SoundsInSequence.Clear();
             }
             else
             {
-                AvailableSounds.Clear();
+                LoadSequences();
+
+                SoundsInSequence.Clear();
                 var sounds = SoundServiceSingleton.Instance.GetSoundsForUser(UserService.SelectedUser);                
-                sounds.ForEach(x => AvailableSounds.Add(x));
+                sounds.ForEach(x => SoundsInSequence.Add(x));
 
                 if(sounds.Count > 0)
                 {
                     nextBtn.IsEnabled = true;
                 }
             }            
+        }
+
+        void LoadSequences()
+        {
+            Sequences.Clear();
+            var soundSequences = SoundServiceSingleton.Instance.GetAllSoundSequences();
+            soundSequences.ForEach(x => Sequences.Add(x));
+        }
+
+        void SetSquenceInListView()
+        {
+            if (selectedSequence == null) return;
+
+            SoundsInSequence.Clear();
+            SelectedSequence.Sounds.ForEach(x => SoundsInSequence.Add(x.Sound));
+
+            MeasurementName = SelectedSequence.Name + " " + DateTime.Now.ToString();
         }
     }
 }

@@ -10,16 +10,6 @@
     <Grid x:Name="gameplayLayoutRoot" Background="White">
         <TextBlock Height="40" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="200" Text="Badanie" TextWrapping="Wrap" FontSize="21.333"/>
         <Button HorizontalAlignment="Right" Margin="0,0,142.449,10" VerticalAlignment="Bottom" Width="100" Content="&lt; Back" Height="25" Click="Button_Click"/>
-
-        <ListView x:Name="listView" ItemsSource="{Binding AvailableSounds}" HorizontalAlignment="Left" Height="320" Margin="226,112,0,0" VerticalAlignment="Top" Width="300" RenderTransformOrigin="-0.505,0.44">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Frequency" Width="100" DisplayMemberBinding="{Binding Frequency}" />
-                    <GridViewColumn Header="Volume" Width="100" DisplayMemberBinding="{Binding Volume}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
         <!--<TextBox x:Name="textBoxfreq1" HorizontalAlignment="Left" Margin="403.065,202.72,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Height="26.882" Width="78.159"/>
         <TextBox x:Name="textBoxfreq2" HorizontalAlignment="Left" Margin="403.065,234.602,0,0" TextWrapping="Wrap" Text="1200" VerticalAlignment="Top" Height="26.882" Width="78.159"/>
         <TextBox x:Name="textBoxfreq3" HorizontalAlignment="Left" Margin="403.065,266.484,0,0" TextWrapping="Wrap" Text="2000" VerticalAlignment="Top" Height="26.882" Width="78.159"/>
@@ -30,6 +20,37 @@
         <TextBlock x:Name="textBlockfreq4" HorizontalAlignment="Left" Margin="281.632,298.366,0,0" TextWrapping="Wrap" Text="Freq 4" VerticalAlignment="Top"/>-->
         <Button x:Name="nextBtn" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="100" Content="Next >" Height="25" Click="Button_Click_1"/>
         <Label x:Name="label" Content="Nazwa badania :" HorizontalAlignment="Left" Margin="226,453,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="328,456,0,0" TextWrapping="Wrap" Text="{Binding MeasurementName}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="328,456,0,0" TextWrapping="NoWrap"  Text="{Binding MeasurementName}" VerticalAlignment="Top" Width="233"/>
+        <ListView x:Name="sequenceListView" ItemsSource="{Binding SoundsInSequence}" SelectedItem="{Binding SelectedSoundInSequence}" HorizontalAlignment="Left" Height="297" Margin="234,144,0,0" VerticalAlignment="Top" Width="327" RenderTransformOrigin="-0.505,0.44">
+            <ListView.Resources>
+                <ContextMenu x:Key="ItemContextMenu">
+                    <MenuItem Header="Usuń dźwięk" Command="{Binding DataContext.DeleteSoundFromSequence, RelativeSource={RelativeSource AncestorType={x:Type ListView}, Mode=FindAncestor}}" Background="WhiteSmoke" />
+                </ContextMenu>
+            </ListView.Resources>
+
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="90" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Frequency" Width="90" DisplayMemberBinding="{Binding Frequency}" />
+                    <GridViewColumn Header="Volume" Width="90" DisplayMemberBinding="{Binding Volume}" />
+                </GridView>
+            </ListView.View>
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}" >
+                    <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <ComboBox x:Name="comboBox" ItemsSource="{Binding Sequences}" SelectedItem="{Binding SelectedSequence}" HorizontalAlignment="Left" Margin="375,117,0,0" VerticalAlignment="Top" Width="186">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Label x:Name="label1" Content="Sekwencje" HorizontalAlignment="Left" Margin="305,113,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.292,0.462"/>
     </Grid>
 </UserControl>

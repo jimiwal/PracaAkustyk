@@ -189,13 +189,6 @@ namespace WPFPageSwitch
 
         }
 
-        //remove sequence
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
         //remove sound from list general
         private void button1_Copy_Click(object sender, RoutedEventArgs e)
         {
@@ -295,6 +288,22 @@ namespace WPFPageSwitch
 
         private void btnAddSequence_Click(object sender, RoutedEventArgs e)
         {
+            SelectedSequence = null;
+            SoundsInSequence.Clear();
+            SequenceName = string.Empty;
+        }
+
+        //remove sequence
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            if(SelectedSequence != null)
+            {
+                SoundSequenceRepositorySingleton.Instance.Remove(SelectedSequence);
+                SoundSequenceRepositorySingleton.Instance.Flush();
+
+                Sequences.Remove(SelectedSequence);
+            }
+
             SelectedSequence = null;
             SoundsInSequence.Clear();
             SequenceName = string.Empty;
