@@ -512,7 +512,7 @@
             </ed:RegularPolygon.RenderTransform>
         </ed:RegularPolygon>
 
-        <Slider x:Name="Slider" Height="300" Value="{Binding ElementName=root, Path=Value}" VerticalAlignment="Top" Orientation="Vertical" Margin="292,70.855,284,0" Style="{DynamicResource SliderStyle1}" ValueChanged="Slider_ValueChanged" Minimum="0" Maximum="10"/>
+        <Slider x:Name="Slider" Height="300" Value="{Binding ElementName=root, Path=Value}" VerticalAlignment="Top" Orientation="Vertical" Margin="292,70.855,284,0" Style="{DynamicResource SliderStyle1}" ValueChanged="Slider_ValueChanged" Minimum="0" Maximum="100"/>
         <!--Minimum="{Binding ElementName=root, Path=Minimum}"
                 Maximum="{Binding ElementName=root, Path=Maximum}"
                 Value="{Binding ElementName=root, Path=Value}"-->

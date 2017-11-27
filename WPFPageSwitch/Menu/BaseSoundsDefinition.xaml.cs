@@ -36,6 +36,7 @@ namespace WPFPageSwitch.Menu
 
         private void BaseSoundsDefinition_Loaded(object sender, RoutedEventArgs e)
         {
+            SoundsCount = 1;
             var sounds = SoundRepositorySingleton.Instance.FindAll().ToList();
             sounds.ForEach(x => AvailableSounds.Add(x));
         }
@@ -70,6 +71,20 @@ namespace WPFPageSwitch.Menu
             }
         }
 
+        private int soundsCount;
+        public int SoundsCount
+        {
+            get
+            {
+                return soundsCount;
+            }
+            set
+            {
+                soundsCount = value;
+                OnPropertyChanged("SoundsCount");
+            }
+        }
+
         public string SoundInProcessForUser
         {
             get
@@ -90,10 +105,37 @@ namespace WPFPageSwitch.Menu
         //Add Sound to list new
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            double frequency = Convert.ToDouble(textBox.Text);
-            double volume = Convert.ToDouble(textBox_Copy.Text);
-            string name = textBox_Copy1.Text;
-            var sound = new Sound()
+            if(SoundsCount == 1)
+            {
+                try
+                {
+                    AddSound(textBox_Copy1.Text, Convert.ToDouble(textBox.Text), Convert.ToDouble(textBox_Copy.Text));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Błąd w trakcie dodawania dźwięku");
+                    return;
+                }
+            }
+            else if( SoundsCount > 1)
+            {
+                int step = 100 / SoundsCount;
+                for (int i = 1; i <= SoundsCount; i++)
+                {
+                    AddSound(textBox_Copy1.Text, Convert.ToDouble(textBox.Text), step * i);
+                }
+            }
+            
+        }
+
+        private void AddSound(string nameOfSound, double freq, double vol)
+        {
+            Sound sound = null;
+  
+            double frequency = freq;
+            double volume = vol;
+            string name = nameOfSound;
+            sound = new Sound()
             {
                 Frequency = frequency,
                 Volume = volume,
@@ -110,13 +152,24 @@ namespace WPFPageSwitch.Menu
         {
             if (listView.SelectedItem == null)
                 return;
+            List<Sound> selectedSoundsCopy = new List<Sound>();
+            foreach (var selectedSound in listView.SelectedItems)
+            {
+                selectedSoundsCopy.Add(selectedSound as Sound);
+            }
 
-            var sound = listView.SelectedItem as Sound;
+            foreach (var selectedSound in selectedSoundsCopy)
+            {
+                var sound = selectedSound;
 
-            SoundRepositorySingleton.Instance.Remove(sound);
-            SoundRepositorySingleton.Instance.Flush();
+                SoundRepositorySingleton.Instance.Remove(sound);
+                SoundRepositorySingleton.Instance.Flush();
 
-            AvailableSounds.Remove(sound);
+                AvailableSounds.Remove(sound);
+            }
+
+
+            
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
