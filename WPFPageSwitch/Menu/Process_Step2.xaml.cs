@@ -9,6 +9,8 @@ using SoundDomain.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -30,6 +32,7 @@ namespace WPFPageSwitch
         private float frequency = 0;
         private float volume = 0;
         ISoundService soundServiceSingleton;
+        private CancellationTokenSource source;        
 
         Measurement myCurrentMeasurement;
         public Process_Step2(ObservableCollection<Sound> availableSounds)
@@ -43,12 +46,24 @@ namespace WPFPageSwitch
             soundServiceSingleton = SoundServiceSingleton.Instance;
 
             this.Loaded += Process_Step2_Loaded;
+            this.Unloaded += Process_Step2_Unloaded;            
+        }
+
+        private void Process_Step2_Unloaded(object sender, RoutedEventArgs e)
+        {
+            if(source != null)
+            {
+                source.Dispose();
+            }
+            
+            this.Loaded -= Process_Step2_Loaded;
+            this.Unloaded -= Process_Step2_Unloaded;            
         }
 
         public System.Collections.ObjectModel.ObservableCollection<Sound> AvailableSounds { get; set; }
 
         private void Process_Step2_Loaded(object sender, RoutedEventArgs e)
-        {
+        {            
             nextBtn.IsEnabled = false;
             radioStackPanel.IsEnabled = false;
             playBtn.IsEnabled = true;
@@ -77,7 +92,7 @@ namespace WPFPageSwitch
         #endregion
 
         //next btn
-        private void button_Click_1(object sender, RoutedEventArgs e)
+        private async void button_Click_1(object sender, RoutedEventArgs e)
         {
             soundServiceSingleton.Stop();
             SaveAnswer();
@@ -104,9 +119,39 @@ namespace WPFPageSwitch
             playBtn.IsEnabled = true;
             radioStackPanel.IsEnabled = false;
             nextBtn.IsEnabled = false;
+
+            source = new CancellationTokenSource();
+            var cancellationToken = source.Token;
+            await Task.Run(async () =>
+            {
+                try
+                {
+                    await Task.Delay(5000, cancellationToken);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                                               
+            });
+
+            if(playBtn.IsEnabled)
+            {
+                PlayNextSound();
+            }
         }
 
         private void playBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(source !=null && source.Token!= null && source.Token.CanBeCanceled)
+            {
+                source.Cancel();
+            }
+
+            PlayNextSound();
+        }
+
+        private void PlayNextSound()
         {
             radioStackPanel.IsEnabled = true;
             playBtn.IsEnabled = false;

@@ -4,17 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using UserDomain.Services.DomainLayer;
 
 namespace WPFPageSwitch.Menu
@@ -27,7 +18,6 @@ namespace WPFPageSwitch.Menu
         public BaseSoundsDefinition()
         {
             InitializeComponent();
-
 
             AvailableSounds = new System.Collections.ObjectModel.ObservableCollection<Sound>();
             this.Loaded += BaseSoundsDefinition_Loaded;
@@ -124,14 +114,12 @@ namespace WPFPageSwitch.Menu
                 {
                     AddSound(textBox_Copy1.Text, Convert.ToDouble(textBox.Text), step * i);
                 }
-            }
-            
+            }            
         }
 
         private void AddSound(string nameOfSound, double freq, double vol)
         {
             Sound sound = null;
-  
             double frequency = freq;
             double volume = vol;
             string name = nameOfSound;
@@ -167,9 +155,6 @@ namespace WPFPageSwitch.Menu
 
                 AvailableSounds.Remove(sound);
             }
-
-
-            
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
