@@ -20,5 +20,9 @@ namespace SoundDomain.Services
         void SaveSoundSequence(SoundSequence soundSequence);
         IList<SoundSequence> GetAllSoundSequences();
         SoundSequence GetSoundSequenceByName(string name);
+
+
+        IList<Sound> GetSoundForFrequency(double frequency);
+        IList<double> GetAllFrequencesFromBaseSounds();
     }
 }

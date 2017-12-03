@@ -1,5 +1,6 @@
 ﻿using SoundDomain.Infrastructure.Repositories;
 using SoundDomain.Model.ValueObjects;
+using SoundDomain.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,11 +16,13 @@ namespace WPFPageSwitch.Menu
     /// </summary>
     public partial class BaseSoundsDefinition : UserControl, ISwitchable, INotifyPropertyChanged
     {
+        public const string All = "Wszystkie";
         public BaseSoundsDefinition()
         {
             InitializeComponent();
 
             AvailableSounds = new System.Collections.ObjectModel.ObservableCollection<Sound>();
+            Frequences = new System.Collections.ObjectModel.ObservableCollection<string>();
             this.Loaded += BaseSoundsDefinition_Loaded;
             this.DataContext = this;
         }
@@ -28,7 +31,12 @@ namespace WPFPageSwitch.Menu
         {
             SoundsCount = 1;
             var sounds = SoundRepositorySingleton.Instance.FindAll().ToList();
+            AvailableSounds.Clear();
             sounds.ForEach(x => AvailableSounds.Add(x));
+
+            var frequences = SoundServiceSingleton.Instance.GetAllFrequencesFromBaseSounds();
+            Frequences.Add(All);
+            frequences.ToList().ForEach(x => Frequences.Add(x.ToString()));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -90,7 +98,45 @@ namespace WPFPageSwitch.Menu
             }
         }
 
+        private string selectedFrequencyFilter;
+        public string SelectedFrequencyFilter
+        {
+            get
+            {
+                return selectedFrequencyFilter;
+            }
+            set
+            {
+                selectedFrequencyFilter = value;
+                OnPropertyChanged("SelectedFrequencyFilter");
+
+                //load sound
+                AvailableSounds.Clear();
+                if(SelectedFrequencyFilter == All)
+                {
+                    var sounds = SoundRepositorySingleton.Instance.FindAll().ToList();
+                    sounds.ForEach(x => AvailableSounds.Add(x));
+                }
+                else
+                {
+                    try
+                    {
+                        double frequency = double.Parse(SelectedFrequencyFilter);
+                        var filteredSounds = SoundServiceSingleton.Instance.GetSoundForFrequency(frequency);
+                        filteredSounds.ToList().ForEach(x => AvailableSounds.Add(x));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Nie mogę pobrać dźwięku dla danej częstotliwości");
+                    }
+                }
+
+            }
+        }
+
         public System.Collections.ObjectModel.ObservableCollection<Sound> AvailableSounds { get; set; }
+
+        public System.Collections.ObjectModel.ObservableCollection<string> Frequences { get; set; }
 
         //Add Sound to list new
         private void button2_Click(object sender, RoutedEventArgs e)

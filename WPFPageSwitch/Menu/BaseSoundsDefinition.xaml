@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignWidth="800" d:DesignHeight="600">
     <Grid>
-        <ListView x:Name="listView" ItemsSource="{Binding AvailableSounds}" SelectedItem="{Binding SelectedSoundGeneral}" HorizontalAlignment="Left" Height="288" Margin="42,26,0,0" VerticalAlignment="Top" Width="424" RenderTransformOrigin="-0.505,0.44">
+        <ListView x:Name="listView" ItemsSource="{Binding AvailableSounds}" SelectedItem="{Binding SelectedSoundGeneral}" HorizontalAlignment="Left" Height="270" Margin="42,44,0,0" VerticalAlignment="Top" Width="424" RenderTransformOrigin="-0.505,0.44">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" Width="200" DisplayMemberBinding="{Binding Name}" />
@@ -17,7 +17,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label x:Name="label" Content="Wszystkie dźwięki" HorizontalAlignment="Left" Margin="72,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.763,0.739"/>
+        <Label x:Name="label" Content="Wszystkie dźwięki" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.763,0.739"/>
         <Button x:Name="button2" Content="Add" HorizontalAlignment="Left" Margin="200,417,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.653,0.835" Click="button2_Click"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="164,328,0,0" TextWrapping="Wrap" Text="Frequency" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="22" Margin="260,328,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
@@ -36,6 +36,8 @@
         <Label x:Name="label2"  Content="Uważaj !!!! usuwanie istnijeących dźwięków" HorizontalAlignment="Left" Margin="490,44,0,0" VerticalAlignment="Top" Height="30"/>
 
         <Label x:Name="label3"  Content="bazowych może mieć wpływ na wykonane badania" HorizontalAlignment="Left" Margin="490,74,0,0" VerticalAlignment="Top" Height="30" Width="300"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="246,17,0,0" VerticalAlignment="Top" Width="109" ItemsSource="{Binding Frequences}" SelectedItem="{Binding SelectedFrequencyFilter}"/>
+        <Label x:Name="label4" Content="Częstotliwość" HorizontalAlignment="Left" Margin="164,17,0,0" VerticalAlignment="Top"/>
 
 
 

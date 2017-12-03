@@ -9,6 +9,8 @@ using UserDomain.Services.DomainLayer;
 using NHibernate.Transform;
 using NHibernate.Util;
 using RepositoryComponents.Patternts;
+using NHibernate.Linq;
+using System.Linq;
 
 namespace SoundDomain.Services
 {
@@ -91,6 +93,21 @@ namespace SoundDomain.Services
         {
             var query = SoundSequenceRepositorySingleton.Instance.Session.QueryOver<SoundSequence>();
             return query.Where(x => x.Name.Equals(name)).Select(x => x).SingleOrDefault<SoundSequence>();
+        }
+
+        public IList<double> GetAllFrequencesFromBaseSounds()
+        {
+            var query = SoundRepositorySingleton.Instance.Session.Query<Sound>();
+            var returnValue = query.Select(x => x.Frequency).Distinct().ToList();
+
+            return returnValue;
+        }
+
+        public IList<Sound> GetSoundForFrequency(double frequency)
+        {
+            var query = SoundRepositorySingleton.Instance.Session.Query<Sound>();
+            var selected = query.Where(x => x.Frequency == frequency).Select(x => x).ToList();
+            return selected;
         }
     }
 
