@@ -34,9 +34,7 @@ namespace WPFPageSwitch.Menu
             AvailableSounds.Clear();
             sounds.ForEach(x => AvailableSounds.Add(x));
 
-            var frequences = SoundServiceSingleton.Instance.GetAllFrequencesFromBaseSounds();
-            Frequences.Add(All);
-            frequences.ToList().ForEach(x => Frequences.Add(x.ToString()));
+            LoadAllFrequences();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -109,18 +107,22 @@ namespace WPFPageSwitch.Menu
             {
                 selectedFrequencyFilter = value;
                 OnPropertyChanged("SelectedFrequencyFilter");
-
+                
                 //load sound
                 AvailableSounds.Clear();
+                
                 if(SelectedFrequencyFilter == All)
                 {
                     var sounds = SoundRepositorySingleton.Instance.FindAll().ToList();
                     sounds.ForEach(x => AvailableSounds.Add(x));
                 }
-                else
+                else if(SelectedFrequencyFilter != null)
                 {
                     try
                     {
+                        //For user easy use copy selected freq to textboxx
+                        textBox.Text = SelectedFrequencyFilter;
+
                         double frequency = double.Parse(SelectedFrequencyFilter);
                         var filteredSounds = SoundServiceSingleton.Instance.GetSoundForFrequency(frequency);
                         filteredSounds.ToList().ForEach(x => AvailableSounds.Add(x));
@@ -140,7 +142,7 @@ namespace WPFPageSwitch.Menu
 
         //Add Sound to list new
         private void button2_Click(object sender, RoutedEventArgs e)
-        {
+        {            
             if(SoundsCount == 1)
             {
                 try
@@ -160,7 +162,12 @@ namespace WPFPageSwitch.Menu
                 {
                     AddSound(textBox_Copy1.Text, Convert.ToDouble(textBox.Text), step * i);
                 }
-            }            
+            }
+
+
+            LoadAllFrequences(); // fill combobox
+            SelectedFrequencyFilter = textBox.Text; // select combobox item to newly added one
+
         }
 
         private void AddSound(string nameOfSound, double freq, double vol)
@@ -206,6 +213,14 @@ namespace WPFPageSwitch.Menu
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             Switcher.Switch(new MainMenu());
+        }
+
+        private void LoadAllFrequences()
+        {
+            var frequences = SoundServiceSingleton.Instance.GetAllFrequencesFromBaseSounds();
+            Frequences.Clear();
+            Frequences.Add(All);
+            frequences.ToList().ForEach(x => Frequences.Add(x.ToString()));
         }
     }
 }

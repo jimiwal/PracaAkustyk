@@ -105,8 +105,9 @@ namespace SoundDomain.Services
 
         public IList<Sound> GetSoundForFrequency(double frequency)
         {
-            var query = SoundRepositorySingleton.Instance.Session.Query<Sound>();
-            var selected = query.Where(x => x.Frequency == frequency).Select(x => x).ToList();
+            Sound sound = null;
+            var query = SoundRepositorySingleton.Instance.Session.QueryOver<Sound>(() => sound);
+            var selected = query.Where(() => sound.Frequency == frequency).OrderBy(() => sound.Volume).Asc.List();
             return selected;
         }
     }
