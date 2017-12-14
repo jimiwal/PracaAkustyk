@@ -20,7 +20,7 @@ using UserDomain.Services.DomainLayer;
 
 namespace WPFPageSwitch
 {
-	public partial class Process_Step1 : UserControl, ISwitchable, INotifyPropertyChanged
+	public partial class Process_Step1 : UserControl, ISwitchable, INotifyPropertyChanged, System.ComponentModel.IDataErrorInfo
     {
         private string measurementName;
 
@@ -28,12 +28,13 @@ namespace WPFPageSwitch
 		{
 			InitializeComponent();
 
+            AutoPlayDelay = "3";
+
             SoundsInSequence = new ObservableCollection<Sound>();
             Sequences = new ObservableCollection<SoundSequence>();
 
             this.Loaded += Process_Step1_Loaded;
             nextBtn.IsEnabled = false;
-
             this.DataContext = this;
         }
 
@@ -70,6 +71,48 @@ namespace WPFPageSwitch
             }
         }
 
+        private string autoPlayDelay;
+        public string AutoPlayDelay
+        {
+            get
+            {
+                return autoPlayDelay;
+            }
+            set
+            {
+                autoPlayDelay = value;
+                OnPropertyChanged("AutoPlayDelay");
+            }
+        }
+        
+        public string Error
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string this[string columnName]
+        {            
+            get
+            {
+                string error = string.Empty;
+                bool isValid = true;
+                switch (columnName)
+                {
+                    case "AutoPlayDelay":
+                        var validation = new StringToIntValidationRule().Validate(AutoPlayDelay, System.Globalization.CultureInfo.CurrentCulture);
+                        isValid = isValid && validation.IsValid;
+                        error = (string)validation.ErrorContent;
+                    break;
+                }
+
+                nextBtn.IsEnabled = isValid;
+                return error;
+            }
+        }
+
         void OnPropertyChanged(String prop)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
@@ -95,8 +138,15 @@ namespace WPFPageSwitch
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            MeasurementService.LastMeasurementName = MeasurementName;
-            Switcher.Switch(new Process_Step2(SoundsInSequence));
+            if(SoundsInSequence != null && SoundsInSequence.Count > 0)
+            {
+                MeasurementService.LastMeasurementName = MeasurementName;
+
+                int delayAutoPlay = 5;
+                delayAutoPlay = int.Parse(AutoPlayDelay);
+
+                Switcher.Switch(new Process_Step2(SoundsInSequence, delayAutoPlay));
+            }   
         }
 
         private void Process_Step1_Loaded(object sender, RoutedEventArgs e)
@@ -116,7 +166,7 @@ namespace WPFPageSwitch
                 if(sounds.Count > 0)
                 {
                     nextBtn.IsEnabled = true;
-                }
+                }                
             }            
         }
 

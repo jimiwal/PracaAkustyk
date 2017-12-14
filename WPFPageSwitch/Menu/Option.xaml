@@ -11,7 +11,7 @@
         <TextBlock Height="40" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="200" Text="Option" TextWrapping="Wrap" FontSize="21.333"/>
         <Button Height="25" HorizontalAlignment="Right" Margin="0,0,20,20" VerticalAlignment="Bottom" Width="100" Content="&lt; Back" Click="Button_Click"/>
         <Grid Background="#FFE5E5E5" Height="600" VerticalAlignment="Bottom">
-            <ListView x:Name="listView" ItemsSource="{Binding AvailableSounds}" SelectedItem="{Binding SelectedSoundGeneral}" HorizontalAlignment="Left" Height="494" Margin="10,26,0,0" VerticalAlignment="Top" Width="310" RenderTransformOrigin="-0.505,0.44">
+            <ListView x:Name="listView" ItemsSource="{Binding AvailableSounds}" SelectedItem="{Binding SelectedSoundGeneral}" HorizontalAlignment="Left" Height="452" Margin="10,68,0,0" VerticalAlignment="Top" Width="310" RenderTransformOrigin="-0.505,0.44">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}" />
@@ -23,6 +23,10 @@
             <Button x:Name="button" Content=">>>>" HorizontalAlignment="Left" Margin="342,172,0,0" VerticalAlignment="Top" Width="74" Click="button_Click_1"/>
             <Button x:Name="button1" Content="Usuń sekwencję" HorizontalAlignment="Left" Margin="612,491,0,0" VerticalAlignment="Top" Width="107" Click="button1_Click" RenderTransformOrigin="-0.16,0.864"/>
             <Label x:Name="label" Content="Wszystkie dźwięki" HorizontalAlignment="Left" Margin="72,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.763,0.739"/>
+
+            <ComboBox x:Name="comboBoxFilter" HorizontalAlignment="Left" Margin="92,42,0,0" VerticalAlignment="Top" Width="109" ItemsSource="{Binding Frequences}" SelectedItem="{Binding SelectedFrequencyFilter}"/>
+            <Label x:Name="label4" Content="Częstotliwość" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top"/>
+
             <Label x:Name="label_Copy" Content="{Binding SoundInProcessForUser}" HorizontalAlignment="Left" Margin="437,0,0,548" VerticalAlignment="Bottom" RenderTransformOrigin="0.763,0.739" Height="26"/>
             <ListView x:Name="sequenceListView" ItemsSource="{Binding SoundsInSequence}" SelectedItem="{Binding SelectedSoundInSequence}" HorizontalAlignment="Left" Height="297" Margin="437,133,0,0" VerticalAlignment="Top" Width="327" RenderTransformOrigin="-0.505,0.44">
                 <ListView.View>

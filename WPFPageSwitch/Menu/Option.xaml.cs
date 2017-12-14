@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using NHibernate.Transform;
 using NHibernate.Util;
 using SoundDomain.Services;
+using WPFPageSwitch.Menu;
 
 namespace WPFPageSwitch
 {
@@ -32,6 +33,8 @@ namespace WPFPageSwitch
             AvailableSounds = new ObservableCollection<Sound>();
             SoundsInSequence = new ObservableCollection<Sound>();
             Sequences = new ObservableCollection<SoundSequence>();
+
+            Frequences = new System.Collections.ObjectModel.ObservableCollection<string>();
 
             this.Loaded += Option_Loaded;
             this.DataContext = this;
@@ -148,6 +151,47 @@ namespace WPFPageSwitch
             }
         }
 
+        private string selectedFrequencyFilter;
+        public string SelectedFrequencyFilter
+        {
+            get
+            {
+                return selectedFrequencyFilter;
+            }
+            set
+            {
+                selectedFrequencyFilter = value;
+                OnPropertyChanged("SelectedFrequencyFilter");
+
+                //load sound
+                AvailableSounds.Clear();
+
+                if (SelectedFrequencyFilter == BaseSoundsDefinition.All)
+                {
+                    var sounds = SoundRepositorySingleton.Instance.FindAll().ToList();
+                    sounds.ForEach(x => AvailableSounds.Add(x));
+                }
+                else if (SelectedFrequencyFilter != null)
+                {
+                    try
+                    {
+                        //For user easy use copy selected freq to textboxx                        
+
+                        double frequency = double.Parse(SelectedFrequencyFilter);
+                        var filteredSounds = SoundServiceSingleton.Instance.GetSoundForFrequency(frequency);
+                        filteredSounds.ToList().ForEach(x => AvailableSounds.Add(x));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Nie mogę pobrać dźwięku dla danej częstotliwości");
+                    }
+                }
+
+            }
+        }
+
+        public System.Collections.ObjectModel.ObservableCollection<string> Frequences { get; set; }
+
         public System.Collections.ObjectModel.ObservableCollection<Sound> AvailableSounds { get; set; }
         public System.Collections.ObjectModel.ObservableCollection<Sound>  SoundsInSequence { get; set; }
         public System.Collections.ObjectModel.ObservableCollection<SoundSequence> Sequences { get;set;}
@@ -158,6 +202,8 @@ namespace WPFPageSwitch
             sounds.ForEach(x => AvailableSounds.Add(x));
 
             LoadSequences();
+
+            LoadAllFrequences();
         }
 
         #region ISwitchable Members
@@ -307,6 +353,14 @@ namespace WPFPageSwitch
             SelectedSequence = null;
             SoundsInSequence.Clear();
             SequenceName = string.Empty;
+        }
+
+        private void LoadAllFrequences()
+        {
+            var frequences = SoundServiceSingleton.Instance.GetAllFrequencesFromBaseSounds();
+            Frequences.Clear();
+            Frequences.Add(BaseSoundsDefinition.All);
+            frequences.ToList().ForEach(x => Frequences.Add(x.ToString()));
         }
     }
 }

@@ -28,6 +28,7 @@ namespace WPFPageSwitch
     //Measurement process
 	public partial class Process_Step2 : UserControl, ISwitchable
 	{
+        private readonly int _delayAutoPlay = 5;
         private int index = 0;
         private float frequency = 0;
         private float volume = 0;
@@ -35,7 +36,7 @@ namespace WPFPageSwitch
         private CancellationTokenSource source;        
 
         Measurement myCurrentMeasurement;
-        public Process_Step2(ObservableCollection<Sound> availableSounds)
+        public Process_Step2(ObservableCollection<Sound> availableSounds, int delayAutoPlay)
 		{
 
             InitializeComponent();
@@ -45,8 +46,10 @@ namespace WPFPageSwitch
 
             soundServiceSingleton = SoundServiceSingleton.Instance;
 
+            _delayAutoPlay = delayAutoPlay;
+
             this.Loaded += Process_Step2_Loaded;
-            this.Unloaded += Process_Step2_Unloaded;            
+            this.Unloaded += Process_Step2_Unloaded;      
         }
 
         private void Process_Step2_Unloaded(object sender, RoutedEventArgs e)
@@ -126,7 +129,7 @@ namespace WPFPageSwitch
             {
                 try
                 {
-                    await Task.Delay(5000, cancellationToken);
+                    await Task.Delay(_delayAutoPlay * 1000, cancellationToken);
                 }
                 catch (Exception ex)
                 {
