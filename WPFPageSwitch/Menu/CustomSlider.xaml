@@ -571,39 +571,48 @@
             </StackPanel.Resources>
 
 
-            <Grid d:LayoutOverrides="LeftPosition, RightPosition">
-                <Rectangle Height="15" Width="70" Stroke="Black" Fill="White" />
-                <TextBlock Text="zbyt głośno" Margin="10,4.52,0,5.48" d:LayoutOverrides="VerticalAlignment" FontSize="8"/>
+            <Grid d:LayoutOverrides="LeftPosition, RightPosition" Margin="7,0,-7,23">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="11*"/>
+                    <RowDefinition Height="14*"/>
+                </Grid.RowDefinitions>
+                <Rectangle Height="17" Width="80" Stroke="Black" Fill="White" Margin="-5,1,-5,7" Grid.RowSpan="2" />
+                <TextBlock Text="zbyt głośno" Margin="9,2,1,8" FontSize="10" Grid.RowSpan="2"/>
             </Grid>
 
-            <Grid d:LayoutOverrides="LeftPosition, RightPosition">
-                <Rectangle Height="15" Width="70" Stroke="Black" Fill="White" />
-                <TextBlock Text="bardzo głośno" Margin="10,4.52,0,5.48" d:LayoutOverrides="VerticalAlignment" FontSize="8"/>
+            <Grid d:LayoutOverrides="LeftPosition, RightPosition" Margin="7,0,-7,23">
+                <Rectangle Height="17" Width="80" Stroke="Black" Fill="White" Margin="-5,0,-5,8" />
+                <TextBlock Text="bardzo głośno" Margin="3,1,-2,9" FontSize="10"/>
             </Grid>
 
-            <Grid d:LayoutOverrides="LeftPosition, RightPosition">
-                <Rectangle Height="15" Width="70" Stroke="Black" Fill="White" />
-                <TextBlock Text="głośno" Margin="10,4.52,0,5.48" d:LayoutOverrides="VerticalAlignment" FontSize="8"/>
+            <Grid d:LayoutOverrides="LeftPosition, RightPosition" Margin="7,0,-7,23">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="13*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="8*"/>
+                </Grid.RowDefinitions>
+                <Rectangle  Height="17" Width="80" Stroke="Black" Fill="White" Margin="-5,-6,-5,0.65" />
+                <TextBlock Text="głośno" Margin="18,-5,-8,3" FontSize="10"/>
             </Grid>
 
-            <Grid d:LayoutOverrides="LeftPosition, RightPosition">
-                <Rectangle Height="15" Width="70" Stroke="Black" Fill="White" />
-                <TextBlock Text="średnio" Margin="10,4.52,0,5.48" d:LayoutOverrides="VerticalAlignment" FontSize="8"/>
+            <Grid d:LayoutOverrides="LeftPosition, RightPosition" Margin="7,0,-7,23">
+                <Rectangle Height="17" Width="80" Stroke="Black" Fill="White" Margin="-5,2,-5,6" />
+                <TextBlock Text="średnio" Margin="16,3,-6,7" FontSize="10"/>
             </Grid>
 
-            <Grid d:LayoutOverrides="LeftPosition, RightPosition">
-                <Rectangle Height="15" Width="70" Stroke="Black" Fill="White" />
-                <TextBlock Text="cicho" Margin="10,4.52,0,5.48" d:LayoutOverrides="VerticalAlignment" FontSize="8"/>
+            <Grid d:LayoutOverrides="LeftPosition, RightPosition" Margin="7,0,-7,23">
+                <Rectangle  Height="17" Width="80" Stroke="Black" Fill="White" Margin="-5,-3,-5,11" />
+                <TextBlock Text="cicho" Margin="20,-2,-10,12" FontSize="10"/>
             </Grid>
 
-            <Grid d:LayoutOverrides="LeftPosition, RightPosition">
-                <Rectangle Height="15" Width="70" Stroke="Black" Fill="White" />
-                <TextBlock Text="bardzo cicho" Margin="10,4.52,0,5.48" d:LayoutOverrides="VerticalAlignment" FontSize="8"/>
+            <Grid d:LayoutOverrides="LeftPosition, RightPosition" Margin="7,0,-7,23">
+                <Rectangle  Height="17" Width="80" Stroke="Black" Fill="White" Margin="-5,-8,-5,16" />
+                <TextBlock Text="bardzo cicho" Margin="10,-7,0,17" FontSize="10"/>
             </Grid>
 
-            <Grid d:LayoutOverrides="LeftPosition, RightPosition">
-                <Rectangle Height="15" Width="70" Stroke="Black" Fill="White" />
-                <TextBlock Margin="10,4.52,0,5.48" d:LayoutOverrides="VerticalAlignment" FontSize="8"><Run Text="nic nie"/><Run Text=" "/><Run Text="słychać"/></TextBlock>
+            <Grid Margin="7,0,-7,23">
+                <Rectangle  Height="17" Width="80" Stroke="Black" Fill="White" Margin="-5,-13,-5,21" />
+                <TextBlock Margin="3,-12,0,22" FontSize="10"><Run Text="nic nie"/><Run Text=" "/><Run Text="słychać"/></TextBlock>
             </Grid>
 
 

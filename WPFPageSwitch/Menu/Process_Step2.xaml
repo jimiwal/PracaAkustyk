@@ -10,14 +10,14 @@
 
     <Grid x:Name="gameplayLayoutRoot" Background="White">
         <TextBlock Height="40" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="200" Text="Hear Sounds" TextWrapping="Wrap" FontSize="21.333"/>
-        <Button HorizontalAlignment="Right" Margin="0,0,142.449,10" VerticalAlignment="Bottom" Width="100" Content="&lt; Back" Height="25" Click="Button_Click"/>
-        <Button x:Name="nextBtn" Content="Next Step" HorizontalAlignment="Left" Margin="501,319,0,0" VerticalAlignment="Top" Width="75" Click="button_Click_1"/>
+        <Button HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="100" Content="&lt; Back" Height="25" Click="Button_Click"/>
+        <Button x:Name="nextBtn" Content="Next Step" HorizontalAlignment="Left" Margin="569,287,0,0" VerticalAlignment="Top" Width="75" Click="button_Click_1"/>
         <TextBlock Visibility="Hidden" x:Name="freqTxt" HorizontalAlignment="Left" Margin="114,69,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
         <TextBlock Visibility="Hidden" x:Name="NameTxt" HorizontalAlignment="Left" Margin="114,90,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
         <TextBlock Visibility="Hidden" x:Name="textBlock" HorizontalAlignment="Left" Margin="20,69,0,0" TextWrapping="Wrap" Text="Frequency" VerticalAlignment="Top"/>
         <TextBlock Visibility="Hidden" x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="20,90,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>
-        <Button x:Name="playBtn" Content="Play" HorizontalAlignment="Left" Margin="110,313,0,0" VerticalAlignment="Top" Width="75" Click="playBtn_Click"/>
-        <StackPanel x:Name="radioStackPanel" HorizontalAlignment="Left" Margin="42,106,0,42" Orientation="Horizontal">
+        <Button x:Name="playBtn" Content="Play" HorizontalAlignment="Left" Margin="178,281,0,0" VerticalAlignment="Top" Width="75" Click="playBtn_Click"/>
+        <StackPanel x:Name="radioStackPanel" HorizontalAlignment="Left" Margin="110,74,0,74" Orientation="Horizontal">
             <local:CustomSlider x:Name="answerSlider" SliderValueChanged="CustomSlider_SliderValueChanged"/>
         </StackPanel>
     </Grid>

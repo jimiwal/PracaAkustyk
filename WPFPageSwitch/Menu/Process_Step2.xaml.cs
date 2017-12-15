@@ -193,5 +193,6 @@ namespace WPFPageSwitch
         {
             nextBtn.IsEnabled = true;
         }
+
     }
 }

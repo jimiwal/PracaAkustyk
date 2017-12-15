@@ -193,21 +193,27 @@ namespace WPFPageSwitch.Menu
         {
             if (listView.SelectedItem == null)
                 return;
-            List<Sound> selectedSoundsCopy = new List<Sound>();
-            foreach (var selectedSound in listView.SelectedItems)
+
+            var answer = MessageBox.Show("Czy na pewno chcesz usunąć dźwikęk bazowy.\nMogą od niego zależeć sekwencje i badania.", "Usuwanie dźwięku bazowego", MessageBoxButton.YesNo);
+
+            if(answer == MessageBoxResult.Yes)
             {
-                selectedSoundsCopy.Add(selectedSound as Sound);
-            }
+                List<Sound> selectedSoundsCopy = new List<Sound>();
+                foreach (var selectedSound in listView.SelectedItems)
+                {
+                    selectedSoundsCopy.Add(selectedSound as Sound);
+                }
 
-            foreach (var selectedSound in selectedSoundsCopy)
-            {
-                var sound = selectedSound;
+                foreach (var selectedSound in selectedSoundsCopy)
+                {
+                    var sound = selectedSound;
 
-                SoundRepositorySingleton.Instance.Remove(sound);
-                SoundRepositorySingleton.Instance.Flush();
+                    SoundRepositorySingleton.Instance.Remove(sound);
+                    SoundRepositorySingleton.Instance.Flush();
 
-                AvailableSounds.Remove(sound);
-            }
+                    AvailableSounds.Remove(sound);
+                }
+            }            
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)

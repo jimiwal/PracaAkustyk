@@ -87,5 +87,15 @@ namespace WPFPageSwitch.Menu
                 handler(this, e);
             }
         }
+
+        private void button_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void button_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
